@@ -1,24 +1,153 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController definesPresentationContext="YES" id="BYZ-38-t0r" customClass="HomeViewController" customModule="Eclipse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="H0M-S6-DUv">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FUq-s3-RWQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="222.5"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="earth" translatesAutoresizingMaskIntoConstraints="NO" id="hWt-4G-vb8">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="222.5"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eye in the sky" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aoE-m2-0Ba">
+                                                <rect key="frame" x="0.0" y="93.5" width="375" height="35"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="RWx-82-eIF"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nasa" translatesAutoresizingMaskIntoConstraints="NO" id="Uay-cf-vBE">
+                                                <rect key="frame" x="327" y="16" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="5LI-Pu-WOo"/>
+                                                    <constraint firstAttribute="height" constant="40" id="yeb-jD-bba"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="hWt-4G-vb8" secondAttribute="trailing" id="3HT-t7-pMZ"/>
+                                            <constraint firstItem="aoE-m2-0Ba" firstAttribute="centerY" secondItem="FUq-s3-RWQ" secondAttribute="centerY" id="5Lu-T4-Vvf"/>
+                                            <constraint firstItem="Uay-cf-vBE" firstAttribute="top" secondItem="FUq-s3-RWQ" secondAttribute="top" constant="16" id="6fJ-3K-F0W"/>
+                                            <constraint firstAttribute="trailing" secondItem="Uay-cf-vBE" secondAttribute="trailing" constant="8" id="ASk-zT-ChZ"/>
+                                            <constraint firstItem="hWt-4G-vb8" firstAttribute="top" secondItem="FUq-s3-RWQ" secondAttribute="top" id="Aqo-jJ-Xid"/>
+                                            <constraint firstItem="hWt-4G-vb8" firstAttribute="leading" secondItem="FUq-s3-RWQ" secondAttribute="leading" id="TPH-0X-e7N"/>
+                                            <constraint firstAttribute="trailing" secondItem="aoE-m2-0Ba" secondAttribute="trailing" id="XBb-BT-S6U"/>
+                                            <constraint firstItem="aoE-m2-0Ba" firstAttribute="leading" secondItem="FUq-s3-RWQ" secondAttribute="leading" id="XHw-0I-Yhz"/>
+                                            <constraint firstAttribute="bottom" secondItem="hWt-4G-vb8" secondAttribute="bottom" id="n9O-za-rQW"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cYU-mn-TSa">
+                                        <rect key="frame" x="0.0" y="222.5" width="375" height="222"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mars" translatesAutoresizingMaskIntoConstraints="NO" id="5xE-he-oJl">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="222"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rover Postcard Maker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ovj-bB-MKS">
+                                                <rect key="frame" x="0.0" y="93.5" width="375" height="35"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="ZzL-4t-qWh"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nasa" translatesAutoresizingMaskIntoConstraints="NO" id="Kbf-zA-ws8">
+                                                <rect key="frame" x="327" y="16" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="bFU-Ut-ukJ"/>
+                                                    <constraint firstAttribute="height" constant="40" id="ibG-MH-dlm"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="5xE-he-oJl" secondAttribute="trailing" id="2ys-nu-S69"/>
+                                            <constraint firstItem="5xE-he-oJl" firstAttribute="top" secondItem="cYU-mn-TSa" secondAttribute="top" id="6bO-GN-4sH"/>
+                                            <constraint firstItem="5xE-he-oJl" firstAttribute="leading" secondItem="cYU-mn-TSa" secondAttribute="leading" id="9I1-ta-l9l"/>
+                                            <constraint firstAttribute="bottom" secondItem="5xE-he-oJl" secondAttribute="bottom" id="ANK-Kz-9z6"/>
+                                            <constraint firstAttribute="trailing" secondItem="Kbf-zA-ws8" secondAttribute="trailing" constant="8" id="HV2-xr-GKc"/>
+                                            <constraint firstAttribute="trailing" secondItem="ovj-bB-MKS" secondAttribute="trailing" id="U14-q4-nAy"/>
+                                            <constraint firstItem="ovj-bB-MKS" firstAttribute="leading" secondItem="cYU-mn-TSa" secondAttribute="leading" id="YWI-JJ-3rz"/>
+                                            <constraint firstItem="ovj-bB-MKS" firstAttribute="centerY" secondItem="cYU-mn-TSa" secondAttribute="centerY" id="a4G-ob-dh2"/>
+                                            <constraint firstItem="Kbf-zA-ws8" firstAttribute="top" secondItem="cYU-mn-TSa" secondAttribute="top" constant="16" id="pAN-iD-MUf"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sjN-vk-Ugm">
+                                        <rect key="frame" x="0.0" y="444.5" width="375" height="222.5"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="moon" translatesAutoresizingMaskIntoConstraints="NO" id="cHa-h0-aaF">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="222.5"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Merlin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OM2-9B-K7Q">
+                                                <rect key="frame" x="0.0" y="94" width="375" height="35"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="EXL-4d-N0f"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="OM2-9B-K7Q" firstAttribute="leading" secondItem="sjN-vk-Ugm" secondAttribute="leading" id="3OS-LV-2nk"/>
+                                            <constraint firstItem="cHa-h0-aaF" firstAttribute="top" secondItem="sjN-vk-Ugm" secondAttribute="top" id="3yE-41-E3T"/>
+                                            <constraint firstItem="cHa-h0-aaF" firstAttribute="leading" secondItem="sjN-vk-Ugm" secondAttribute="leading" id="Dmg-X8-P0O"/>
+                                            <constraint firstAttribute="trailing" secondItem="cHa-h0-aaF" secondAttribute="trailing" id="G10-dJ-bri"/>
+                                            <constraint firstAttribute="trailing" secondItem="OM2-9B-K7Q" secondAttribute="trailing" id="PAz-RV-dvs"/>
+                                            <constraint firstItem="OM2-9B-K7Q" firstAttribute="centerY" secondItem="sjN-vk-Ugm" secondAttribute="centerY" id="TlU-Gf-3BS"/>
+                                            <constraint firstAttribute="bottom" secondItem="cHa-h0-aaF" secondAttribute="bottom" id="xoB-61-Zpt"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="H0M-S6-DUv" secondAttribute="bottom" id="3JK-eT-gKz"/>
+                            <constraint firstItem="H0M-S6-DUv" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="6oS-aa-Vv5"/>
+                            <constraint firstAttribute="trailing" secondItem="H0M-S6-DUv" secondAttribute="trailing" id="Vzg-0h-0Y4"/>
+                            <constraint firstItem="H0M-S6-DUv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="iWr-M9-Tzb"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="startStackView" destination="H0M-S6-DUv" id="kfN-hr-h5Q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="120.98950524737631"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="earth" width="800" height="800"/>
+        <image name="mars" width="2970" height="2970"/>
+        <image name="moon" width="3240" height="3240"/>
+        <image name="nasa" width="2000" height="1673"/>
+    </resources>
 </document>
