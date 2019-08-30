@@ -7,14 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8000928D231011EB0043C1CA /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8000928C231011EB0043C1CA /* APIClient.swift */; };
 		801E5500230162FD00170248 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801E54FF230162FD00170248 /* AppDelegate.swift */; };
 		801E5502230162FD00170248 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801E5501230162FD00170248 /* HomeViewController.swift */; };
 		801E5505230162FD00170248 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 801E5503230162FD00170248 /* Main.storyboard */; };
 		801E5507230162FD00170248 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 801E5506230162FD00170248 /* Assets.xcassets */; };
 		801E550A230162FD00170248 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 801E5508230162FD00170248 /* LaunchScreen.storyboard */; };
+		801E55352302FD8D00170248 /* EarthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801E55342302FD8D00170248 /* EarthViewController.swift */; };
+		801E5537230328D200170248 /* LocationSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801E5536230328D200170248 /* LocationSearchController.swift */; };
+		805333D2230D6EF0008835CE /* CurrentLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805333D1230D6EF0008835CE /* CurrentLocationCell.swift */; };
+		805333D8230DB3E3008835CE /* MKPlacemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805333D7230DB3E3008835CE /* MKPlacemark.swift */; };
+		805333DD230E8522008835CE /* LocationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805333DC230E8522008835CE /* LocationAnnotationView.swift */; };
+		805333E1230ED70A008835CE /* SelectedLocationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805333E0230ED709008835CE /* SelectedLocationAnnotation.swift */; };
+		805333E3230ED854008835CE /* SelectedLocationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805333E2230ED854008835CE /* SelectedLocationAnnotationView.swift */; };
+		805333E5230EEC8E008835CE /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805333E4230EEC8E008835CE /* UIView.swift */; };
+		808E9C582313097A008C9DE6 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E9C572313097A008C9DE6 /* UIImageView.swift */; };
+		80B07965231919F000892503 /* LocationAnnotationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80B07964231919F000892503 /* LocationAnnotationView.xib */; };
+		80C3998F231685E600F41E3B /* SateliteImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C3998E231685E600F41E3B /* SateliteImageView.swift */; };
+		80F8E62B231035D00038171D /* EarthImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8E62A231035D00038171D /* EarthImage.swift */; };
+		80F8E62D231118630038171D /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8E62C231118630038171D /* APIError.swift */; };
+		80F8E62F23111BB90038171D /* NASAClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8E62E23111BB90038171D /* NASAClient.swift */; };
+		80F8E63123111C770038171D /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8E63023111C770038171D /* Endpoint.swift */; };
+		80F8E63323111DBE0038171D /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8E63223111DBE0038171D /* Secrets.swift */; };
+		80F8E63623111FAF0038171D /* NASA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8E63523111FAF0038171D /* NASA.swift */; };
+		80F8E638231126180038171D /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8E637231126180038171D /* Date.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8000928C231011EB0043C1CA /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		801E54FC230162FD00170248 /* Eclipse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eclipse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		801E54FF230162FD00170248 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		801E5501230162FD00170248 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +42,24 @@
 		801E5506230162FD00170248 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		801E5509230162FD00170248 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		801E550B230162FD00170248 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		801E55342302FD8D00170248 /* EarthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarthViewController.swift; sourceTree = "<group>"; };
+		801E5536230328D200170248 /* LocationSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchController.swift; sourceTree = "<group>"; };
+		805333D1230D6EF0008835CE /* CurrentLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationCell.swift; sourceTree = "<group>"; };
+		805333D7230DB3E3008835CE /* MKPlacemark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKPlacemark.swift; sourceTree = "<group>"; };
+		805333DC230E8522008835CE /* LocationAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAnnotationView.swift; sourceTree = "<group>"; };
+		805333E0230ED709008835CE /* SelectedLocationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedLocationAnnotation.swift; sourceTree = "<group>"; };
+		805333E2230ED854008835CE /* SelectedLocationAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedLocationAnnotationView.swift; sourceTree = "<group>"; };
+		805333E4230EEC8E008835CE /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		808E9C572313097A008C9DE6 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		80B07964231919F000892503 /* LocationAnnotationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationAnnotationView.xib; sourceTree = "<group>"; };
+		80C3998E231685E600F41E3B /* SateliteImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SateliteImageView.swift; sourceTree = "<group>"; };
+		80F8E62A231035D00038171D /* EarthImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarthImage.swift; sourceTree = "<group>"; };
+		80F8E62C231118630038171D /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		80F8E62E23111BB90038171D /* NASAClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAClient.swift; sourceTree = "<group>"; };
+		80F8E63023111C770038171D /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		80F8E63223111DBE0038171D /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		80F8E63523111FAF0038171D /* NASA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASA.swift; sourceTree = "<group>"; };
+		80F8E637231126180038171D /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +73,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8000928B231011C70043C1CA /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				80F8E63223111DBE0038171D /* Secrets.swift */,
+				80F8E63423111F9E0038171D /* Endpoint */,
+				80F8E62E23111BB90038171D /* NASAClient.swift */,
+				8000928C231011EB0043C1CA /* APIClient.swift */,
+				80F8E62C231118630038171D /* APIError.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		8000928E231012150043C1CA /* MapAnnotation */ = {
+			isa = PBXGroup;
+			children = (
+				805333E2230ED854008835CE /* SelectedLocationAnnotationView.swift */,
+				805333E0230ED709008835CE /* SelectedLocationAnnotation.swift */,
+			);
+			path = MapAnnotation;
+			sourceTree = "<group>";
+		};
+		801884C72305CE0D00523F79 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				80F8E62A231035D00038171D /* EarthImage.swift */,
+				8000928E231012150043C1CA /* MapAnnotation */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		801E54F3230162FD00170248 = {
 			isa = PBXGroup;
 			children = (
@@ -55,13 +123,90 @@
 			isa = PBXGroup;
 			children = (
 				801E54FF230162FD00170248 /* AppDelegate.swift */,
-				801E5501230162FD00170248 /* HomeViewController.swift */,
-				801E5503230162FD00170248 /* Main.storyboard */,
+				8000928B231011C70043C1CA /* Networking */,
+				805333D5230DB3BD008835CE /* Helper */,
+				805333D0230D6ED3008835CE /* Delegate & Datasource */,
+				801884C72305CE0D00523F79 /* Models */,
+				801E55122302A00800170248 /* Views */,
+				801E551123029FF800170248 /* Controllers */,
+				808E9C5623127A2A008C9DE6 /* Tests */,
 				801E5506230162FD00170248 /* Assets.xcassets */,
-				801E5508230162FD00170248 /* LaunchScreen.storyboard */,
 				801E550B230162FD00170248 /* Info.plist */,
 			);
 			path = Eclipse;
+			sourceTree = "<group>";
+		};
+		801E551123029FF800170248 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				801E5501230162FD00170248 /* HomeViewController.swift */,
+				801E55342302FD8D00170248 /* EarthViewController.swift */,
+				801E5536230328D200170248 /* LocationSearchController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		801E55122302A00800170248 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				801E5508230162FD00170248 /* LaunchScreen.storyboard */,
+				801E5503230162FD00170248 /* Main.storyboard */,
+				80B07964231919F000892503 /* LocationAnnotationView.xib */,
+				805333DC230E8522008835CE /* LocationAnnotationView.swift */,
+				80C3998E231685E600F41E3B /* SateliteImageView.swift */,
+				805333D9230DB71E008835CE /* Cells */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		805333D0230D6ED3008835CE /* Delegate & Datasource */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Delegate & Datasource";
+			sourceTree = "<group>";
+		};
+		805333D5230DB3BD008835CE /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				805333D6230DB3C9008835CE /* Extensions */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		805333D6230DB3C9008835CE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				80F8E637231126180038171D /* Date.swift */,
+				805333D7230DB3E3008835CE /* MKPlacemark.swift */,
+				805333E4230EEC8E008835CE /* UIView.swift */,
+				808E9C572313097A008C9DE6 /* UIImageView.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		805333D9230DB71E008835CE /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				805333D1230D6EF0008835CE /* CurrentLocationCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		808E9C5623127A2A008C9DE6 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		80F8E63423111F9E0038171D /* Endpoint */ = {
+			isa = PBXGroup;
+			children = (
+				80F8E63523111FAF0038171D /* NASA.swift */,
+				80F8E63023111C770038171D /* Endpoint.swift */,
+			);
+			path = Endpoint;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,6 +269,7 @@
 			files = (
 				801E550A230162FD00170248 /* LaunchScreen.storyboard in Resources */,
 				801E5507230162FD00170248 /* Assets.xcassets in Resources */,
+				80B07965231919F000892503 /* LocationAnnotationView.xib in Resources */,
 				801E5505230162FD00170248 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,8 +281,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				805333E5230EEC8E008835CE /* UIView.swift in Sources */,
+				80F8E63323111DBE0038171D /* Secrets.swift in Sources */,
+				805333E1230ED70A008835CE /* SelectedLocationAnnotation.swift in Sources */,
+				80F8E62B231035D00038171D /* EarthImage.swift in Sources */,
+				801E5537230328D200170248 /* LocationSearchController.swift in Sources */,
+				8000928D231011EB0043C1CA /* APIClient.swift in Sources */,
+				805333D8230DB3E3008835CE /* MKPlacemark.swift in Sources */,
+				80F8E638231126180038171D /* Date.swift in Sources */,
 				801E5502230162FD00170248 /* HomeViewController.swift in Sources */,
+				805333E3230ED854008835CE /* SelectedLocationAnnotationView.swift in Sources */,
+				80F8E63623111FAF0038171D /* NASA.swift in Sources */,
+				80F8E62F23111BB90038171D /* NASAClient.swift in Sources */,
+				80F8E63123111C770038171D /* Endpoint.swift in Sources */,
+				805333D2230D6EF0008835CE /* CurrentLocationCell.swift in Sources */,
+				80C3998F231685E600F41E3B /* SateliteImageView.swift in Sources */,
 				801E5500230162FD00170248 /* AppDelegate.swift in Sources */,
+				801E55352302FD8D00170248 /* EarthViewController.swift in Sources */,
+				808E9C582313097A008C9DE6 /* UIImageView.swift in Sources */,
+				805333DD230E8522008835CE /* LocationAnnotationView.swift in Sources */,
+				80F8E62D231118630038171D /* APIError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

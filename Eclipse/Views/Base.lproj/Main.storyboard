@@ -13,7 +13,7 @@
         <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController definesPresentationContext="YES" id="BYZ-38-t0r" customClass="HomeViewController" customModule="Eclipse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="HomeViewController" customModule="Eclipse" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -126,7 +126,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="backgroundColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="H0M-S6-DUv" secondAttribute="bottom" id="3JK-eT-gKz"/>
                             <constraint firstItem="H0M-S6-DUv" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="6oS-aa-Vv5"/>
@@ -136,6 +136,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="eyeInTheSkyView" destination="FUq-s3-RWQ" id="da3-GI-5VJ"/>
                         <outlet property="startStackView" destination="H0M-S6-DUv" id="kfN-hr-h5Q"/>
                     </connections>
                 </viewController>
@@ -143,11 +144,122 @@
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="120.98950524737631"/>
         </scene>
+        <!--Earth View Controller-->
+        <scene sceneID="fpy-D1-283">
+            <objects>
+                <viewController storyboardIdentifier="EarthViewController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vNH-66-PkN" customClass="EarthViewController" customModule="Eclipse" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3Zq-RZ-GHv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E6u-93-S5b">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="E6u-93-S5b" firstAttribute="top" secondItem="M5a-N7-tr8" secondAttribute="top" id="Ave-go-H1e"/>
+                            <constraint firstItem="E6u-93-S5b" firstAttribute="leading" secondItem="M5a-N7-tr8" secondAttribute="leading" id="Swb-m1-bKj"/>
+                            <constraint firstItem="M5a-N7-tr8" firstAttribute="trailing" secondItem="E6u-93-S5b" secondAttribute="trailing" id="Tla-Oh-mUI"/>
+                            <constraint firstItem="M5a-N7-tr8" firstAttribute="bottom" secondItem="E6u-93-S5b" secondAttribute="bottom" id="vHr-Cv-cBe"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="M5a-N7-tr8"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <connections>
+                        <outlet property="mapView" destination="E6u-93-S5b" id="o7I-aw-Wcf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5kx-c6-bXT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="940" y="120.98950524737631"/>
+        </scene>
+        <!--Location Search Controller-->
+        <scene sceneID="Uhf-3h-9Cv">
+            <objects>
+                <tableViewController storyboardIdentifier="LocationSearchController" definesPresentationContext="YES" id="Asc-S6-ebp" customClass="LocationSearchController" customModule="Eclipse" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Nd5-rr-H3u">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CurrentLocationCell" id="mf7-l9-zzE" customClass="CurrentLocationCell" customModule="Eclipse" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mf7-l9-zzE" id="0Zk-uX-HyP">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="uW4-tU-riU">
+                                            <rect key="frame" x="16" y="10" width="174.5" height="24"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="locationPin" translatesAutoresizingMaskIntoConstraints="NO" id="M3a-PW-Xkt">
+                                                    <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="24" id="a4C-4i-XFv"/>
+                                                        <constraint firstAttribute="height" constant="24" id="iLM-ji-SLF"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9qG-vv-1z2">
+                                                    <rect key="frame" x="47" y="0.0" width="127.5" height="24"/>
+                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="uW4-tU-riU" firstAttribute="leading" secondItem="0Zk-uX-HyP" secondAttribute="leading" constant="16" id="9Uz-fL-Cyo"/>
+                                        <constraint firstItem="uW4-tU-riU" firstAttribute="centerY" secondItem="0Zk-uX-HyP" secondAttribute="centerY" id="fDI-Us-pCY"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationResultCell" textLabel="8g5-rg-AYj" detailTextLabel="yFw-K2-eer" rowHeight="60" style="IBUITableViewCellStyleSubtitle" id="LAs-nm-pQF" customClass="LocationResultCell" customModule="Eclipse" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="375" height="60"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LAs-nm-pQF" id="cmg-0h-nkL">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8g5-rg-AYj">
+                                            <rect key="frame" x="15" y="6" width="31.5" height="22.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yFw-K2-eer">
+                                            <rect key="frame" x="15" y="31.5" width="40.5" height="19.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Asc-S6-ebp" id="l8r-YH-niu"/>
+                            <outlet property="delegate" destination="Asc-S6-ebp" id="fG0-qp-Whj"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oeH-5z-tRd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1728.8" y="121.88905547226388"/>
+        </scene>
     </scenes>
     <resources>
         <image name="earth" width="800" height="800"/>
+        <image name="locationPin" width="16" height="16"/>
         <image name="mars" width="2970" height="2970"/>
         <image name="moon" width="3240" height="3240"/>
-        <image name="nasa" width="2000" height="1673"/>
+        <image name="nasa" width="64" height="53.5"/>
     </resources>
 </document>

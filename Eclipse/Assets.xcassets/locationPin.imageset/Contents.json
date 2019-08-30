@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "nasa.png",
+      "filename" : "locationPin.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "nasa@2x.png",
+      "filename" : "locationPin@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "nasa@3x.png",
+      "filename" : "locationPin@3x.png",
       "scale" : "3x"
     }
   ],
