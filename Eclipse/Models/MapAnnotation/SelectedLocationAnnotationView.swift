@@ -7,15 +7,19 @@
 //
 
 import MapKit
+//
+//protocol Actionable: class {
+//    func action(place: MKPlacemark, annotation: MKAnnotationView) -> (() -> Void)
+//}
 
 class SelectedLocationAnnotationView: MKAnnotationView {
     
     // Constants
     private let pinImage = UIImage(named: "nasa")
     private let animationDuration = 0.3
-    let client = NASAClient()
     
     weak var customCalloutView: LocationAnnotationView?
+    var actionDelegate: EarthViewController?
     
     override var annotation: MKAnnotation? {
         willSet {
@@ -23,13 +27,11 @@ class SelectedLocationAnnotationView: MKAnnotationView {
         }
     }
     
-    override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
+    init(annotation: MKAnnotation?, reuseIdentifier: String?, actionDelegate: EarthViewController) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         self.canShowCallout = false
         self.image = pinImage
-        
-        
-        
+        self.actionDelegate = actionDelegate
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -48,12 +50,8 @@ class SelectedLocationAnnotationView: MKAnnotationView {
             if let newCustomCalloutView = loadLocationDetailConfigView() {
                 
                 // Location ajustments from top-left
-                
                 newCustomCalloutView.frame.origin.x -= newCustomCalloutView.frame.width / 2.0 - (self.frame.width / 2.0)
                 newCustomCalloutView.frame.origin.y -= newCustomCalloutView.frame.height
-                
-                self.layer.borderWidth = 1.0
-                self.layer.borderColor = UIColor.blue.cgColor
                 
                 // Set Custom View
                 self.addSubview(newCustomCalloutView)
@@ -113,13 +111,13 @@ class SelectedLocationAnnotationView: MKAnnotationView {
     // MARK: - Helper
     
     private func loadLocationDetailConfigView() -> LocationAnnotationView? {
-        let locationAnnotationView = LocationAnnotationView()
+        guard let views = Bundle.main.loadNibNamed(String(describing: LocationAnnotationView.self), owner: self, options: nil), let locationAnnotationView = views.first as? LocationAnnotationView else { return nil }
             
         if let locationAnnotation = annotation as? SelectedLocationAnnotation {
             
             let place = locationAnnotation.place
             
-            locationAnnotationView.imageAction = action(place: place)
+            locationAnnotationView.imageAction = actionDelegate?.action(place: place, annotation: self)
             
             locationAnnotationView.configureFor(place: place)
             locationAnnotationView.place = place
@@ -128,44 +126,5 @@ class SelectedLocationAnnotationView: MKAnnotationView {
         
         return locationAnnotationView
     }
-    
-    private func action(place: MKPlacemark) -> (() -> Void) {
-        
-        let action = { [weak self] in
-            
-            guard let strongSelf = self else { return }
-            
-            strongSelf.client.getEarthImageData(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude) { data, error in
-                
-                DispatchQueue.main.async {
-                    
-                    let view = SateliteImageView()
-                    
-                    if let data = data {
-                        
-                        strongSelf.client.getImage(earthImageJSON: data) { imageData, error in
-                            
-                            DispatchQueue.main.async {
-                                guard let imageData = imageData, let image = UIImage(data: imageData), let superview = self?.superview else { return }
-                                view.imageView.image = image
-                                superview.addSubview(view)
-                                view.centerXAnchor.constraint(equalTo: superview.centerXAnchor).isActive = true
-                                view.centerYAnchor.constraint(equalTo: superview.centerYAnchor).isActive = true
-                            }
-     
-                        }
-                        
-                        
-                    }
-                }
-                
-            }
-            
-        }
-        
-        return action
-    }
-    
-    
     
 }

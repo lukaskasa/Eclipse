@@ -55,7 +55,7 @@ class NASAClient: APIClient {
         
     }
     
-    /// Typealias for Image
+    /// Typealias for Earth Image Handler Type
     typealias EarthImageCompletionHandler = (Data?, APIError?) -> Void
     
     func getImage(earthImageJSON: EarthImage, completionHandler completion: @escaping EarthImageCompletionHandler) {
@@ -77,6 +77,72 @@ class NASAClient: APIClient {
     }
     
     
+    /// Typealias for Mars Imagery Rover
+    typealias MarsImageryCompletionHandler = (MarsImages?, APIError?) -> Void
+    
+    func getMarsImages(sol: Int = 1000, camera: String? = nil, completionHandler completion: @escaping MarsImageryCompletionHandler) {
+        
+        let endpoint = NASA.marsRoverImagery(sol: sol, camera: camera)
+        
+        performRequest(with: endpoint.request) { photos, error in
+            
+            if let photos = photos {
+                
+                do {
+                    
+                    let images = try self.jsonDecoder.decode(MarsImages.self, from: photos)
+                    completion(images, nil)
+                    
+                } catch {
+                    
+                    completion(nil, .jsonParsingFailure)
+                    
+                }
+                
+            }
+            
+            if error != nil {
+                completion(nil, .requestFailed)
+            }
+            
+        }
+        
+    }
+    
+    /// Typealias for Mars Weather
+    typealias MarsWeatherCompletionHandler = (MarsWeatherData?, APIError?) -> Void
+
+    
+    func getMarsWeather(completionHandler completion: @escaping MarsWeatherCompletionHandler) {
+        
+        let endpoint = NASA.marsWeather
+        
+        print(endpoint.request)
+        
+        performRequest(with: endpoint.request) { sols, error in
+            
+            if let sols = sols {
+                
+                do {
+                    
+                    let sols = try self.jsonDecoder.decode(MarsWeatherData.self, from: sols)
+                    completion(sols, nil)
+                    
+                } catch {
+                    
+                    completion(nil, .jsonParsingFailure)
+                    
+                }
+                
+            }
+            
+            if error != nil {
+                completion(nil, .requestFailed)
+            }
+            
+        }
+        
+    }
     
     /**
      Performs the data request for the given request

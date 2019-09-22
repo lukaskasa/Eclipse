@@ -10,6 +10,8 @@ import Foundation
 
 enum NASA {
     case earthImagery(latitude: Double, longitude: Double)
+    case marsRoverImagery(sol: Int, camera: String?)
+    case marsWeather
 }
 
 extension NASA: Endpoint {
@@ -23,6 +25,10 @@ extension NASA: Endpoint {
         switch self {
         case .earthImagery:
             return "/planetary/earth/imagery/"
+        case .marsRoverImagery:
+            return "/mars-photos/api/v1/rovers/curiosity/photos/"
+        case .marsWeather:
+            return "/insight_weather/"
         }
         
     }
@@ -37,6 +43,17 @@ extension NASA: Endpoint {
                 //URLQueryItem(name: "dim", value: dimension.description),
                 //URLQueryItem(name: "date", value: date),
                 //URLQueryItem(name: "cloud_score", value: cloudScore.description)
+            ]
+        case .marsRoverImagery(sol: let sol, camera: let camera):
+            return [
+                URLQueryItem(name: "sol", value: sol.description),
+                URLQueryItem(name: "camera", value: camera)
+                //URLQueryItem(name: "page", value: page)
+            ]
+        case .marsWeather:
+            return [
+                URLQueryItem(name: "ver", value: "1.0"),
+                URLQueryItem(name: "feedtype", value: "json")
             ]
         }
         

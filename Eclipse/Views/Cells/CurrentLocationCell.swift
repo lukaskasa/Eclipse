@@ -15,6 +15,7 @@ class CurrentLocationCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
+        backgroundColor = .clear
     }
     
 }

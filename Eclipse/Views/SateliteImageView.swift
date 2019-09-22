@@ -11,11 +11,15 @@ import UIKit
 // Constants
 private let viewWidth: CGFloat = 256.0
 private let viewHeight: CGFloat = 298.0
+private let primaryFont: UIFont = UIFont(name: "Futura", size: 17.0)!
 private let brandColor = UIColor(red: 0, green: 102/255, blue: 179/255, alpha: 1.0)
+private let secondaryColor = UIColor(red: 238/255, green: 22/255, blue: 31/255, alpha: 1.0)
 
 class SateliteImageView: UIView {
     
     // MARK: - Properties
+    var saveAction: (() -> Void)?
+    var cancelAction: (() -> Void)?
 
     
     lazy var imageView: UIImageView = {
@@ -25,9 +29,29 @@ class SateliteImageView: UIView {
     
     lazy var saveButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Save", for: .normal)
+        let attributedString = NSAttributedString(string: "Save", attributes: [NSAttributedString.Key.font: primaryFont])
+        button.setAttributedTitle(attributedString, for: .normal)
         button.backgroundColor = brandColor
+        button.tintColor = .white
         return button
+    }()
+    
+    lazy var cancelButton: UIButton = {
+        let button = UIButton(type: .system)
+        let attributedString = NSAttributedString(string: "Cancel", attributes: [NSAttributedString.Key.font: primaryFont])
+        button.setAttributedTitle(attributedString, for: .normal)
+        button.backgroundColor = secondaryColor
+        button.tintColor = .white
+        return button
+    }()
+     
+    lazy var buttonStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.addArrangedSubview(saveButton)
+        stackView.addArrangedSubview(cancelButton)
+        return stackView
     }()
     
     override init(frame: CGRect) {
@@ -35,6 +59,7 @@ class SateliteImageView: UIView {
         self.backgroundColor = .black
         setupViews()
         setupConstraints()
+        addActions()
     }
     
     convenience init() {
@@ -47,33 +72,48 @@ class SateliteImageView: UIView {
     
     func setupViews() {
         self.addSubview(imageView)
-        self.addSubview(saveButton)
+        self.addSubview(buttonStackView)
     }
     
     func setupConstraints() {
         // Main View
         self.translatesAutoresizingMaskIntoConstraints = false
         
+        setupImageViewConstraints()
+        setStackViewConstraints()
+    }
+    
+    fileprivate func setupImageViewConstraints() {
         // Image View Constraints
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
         imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
         imageView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
-        //imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 256.0).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 256.0).isActive = true
-        
-        setSaveButtonConstraints()
     }
     
-    fileprivate func setSaveButtonConstraints() {
+    fileprivate func setStackViewConstraints() {
         // Button Constraints
-        saveButton.translatesAutoresizingMaskIntoConstraints = false
-        saveButton.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
-        saveButton.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 0).isActive = true
-        saveButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
-        saveButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
-        saveButton.heightAnchor.constraint(equalToConstant: 42.0).isActive = true
+        buttonStackView.translatesAutoresizingMaskIntoConstraints = false
+        buttonStackView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
+        buttonStackView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 0).isActive = true
+        buttonStackView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+        buttonStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+        buttonStackView.heightAnchor.constraint(equalToConstant: 42.0).isActive = true
+    }
+    
+    func addActions() {
+        cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
+        saveButton.addTarget(self, action: #selector(save), for: .touchUpInside)
+    }
+    
+    @objc func cancel() {
+        cancelAction?()
+    }
+    
+    @objc func save() {
+        saveAction?()
     }
     
 }

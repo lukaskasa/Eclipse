@@ -1,0 +1,317 @@
+//
+//  EarthViewController.swift
+//  Eclipse
+//
+//  Created by Lukas Kasakaitis on 13.08.19.
+//  Copyright © 2019 Lukas Kasakaitis. All rights reserved.
+//
+
+import UIKit
+import MapKit
+
+protocol MarginAdjustable: class {
+    func changeMargin() -> Void
+}
+
+class EarthViewController: UIViewController {
+    
+    // MARK: - Outlets
+    
+    @IBOutlet weak var mapView: MKMapView!
+    
+    // MARK: - Properties
+    
+    // Constants
+    private let darkGrey = UIColor(red: 26/255, green: 26/255, blue: 26/255, alpha: 1.0)
+    private let searchPlaceholder = "Search for a location"
+    
+    let client = NASAClient()
+    var sateliteImage: UIImage!
+    var annotationView: MKAnnotationView?
+    var navigationBar: NavigationBar?
+    var searchBar: UISearchBar!
+    var searchView: UIView!
+    var locationSearchController: LocationSearchController?
+    var loadAnimation: LoadAnimation?
+    
+    lazy var searchController: UISearchController = {
+        return UISearchController(searchResultsController: locationSearchController)
+    }()
+    
+    // MARK - View Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Setup
+        setDelegates()
+        setupNavigationBar()
+        setupMap()
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
+    // MARK: - Helper
+    
+    func setDelegates() {
+        locationSearchController = (storyboard!.instantiateViewController(withIdentifier: String(describing: LocationSearchController.self)) as! LocationSearchController)
+        searchController.searchBar.delegate = locationSearchController
+        searchController.searchResultsUpdater = locationSearchController
+        mapView.delegate = self
+        locationSearchController?.dismissableDelegate = self
+        locationSearchController?.handleMapSearchDelegate = self
+    }
+    
+    func setupNavigationBar() {
+        navigationBar = NavigationBar(for: self.view, title: "Eye in the sky", leftButton: .back, rightButton: .search, leftButtonAction: #selector(closeSearch), rightButtonAction: #selector(search))
+        navigationBar?.load()
+        setupSearchBar()
+    }
+    
+    func setupSearchBar() {
+        locationSearchController?.mapView = mapView
+
+        definesPresentationContext = true
+        searchController.hidesNavigationBarDuringPresentation = false
+        //searchController.dimsBackgroundDuringPresentation = false
+        //navigationBar?.navItem.searchController = searchController
+
+        searchView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 56.0))
+        searchView.backgroundColor = .clear
+        searchView.isHidden = true
+        // Add a blur effect to the searchView
+        var blurStyle: UIBlurEffect.Style = .dark
+        
+        if #available(iOS 13, *) {
+            blurStyle = .systemChromeMaterialDark
+        }
+        
+        let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: blurStyle))
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurEffectView.frame = searchView.bounds
+        searchView.addSubview(blurEffectView)
+
+        view.addSubview(searchView)
+
+        // Add constraints
+        searchView.translatesAutoresizingMaskIntoConstraints = false
+        searchView.topAnchor.constraint(equalTo: (navigationBar?.navBar.bottomAnchor)!, constant: 0).isActive = true
+        searchView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        searchView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+        searchView.heightAnchor.constraint(equalToConstant: 56.0).isActive = true
+
+        // Configure the search bar
+        searchBar = searchController.searchBar
+        searchBar.isHidden = true
+        searchBar.placeholder = searchPlaceholder
+        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = .white
+        searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
+        searchBar.tintColor = .white
+        searchBar.barStyle = .blackTranslucent
+        searchBar.isTranslucent = true
+
+        searchView.addSubview(searchBar)
+    }
+
+    func setupMap() {
+        mapView.translatesAutoresizingMaskIntoConstraints = false
+        mapView.showsUserLocation = true
+        mapView.isZoomEnabled = true
+        mapView.isScrollEnabled = true
+    }
+    
+    func startAnimation() {
+        let dimView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        loadAnimation = LoadAnimation(for: self.view)
+        
+        dimView.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        dimView.tag = 20
+        view.addSubview(dimView)
+        
+        view.addSubview(loadAnimation!)
+
+        loadAnimation?.translatesAutoresizingMaskIntoConstraints = false
+        loadAnimation?.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        loadAnimation?.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        loadAnimation?.start()
+    }
+    
+    @objc func search() {
+        navigationBar?.navItem.leftBarButtonItem = NavBarButton.close.button(action: #selector(closeSearch))
+        searchBar.becomeFirstResponder()
+        searchView.isHidden = false
+        searchBar.isHidden = false
+    }
+    
+    @objc func closeSearch() {
+        dismissSearch()
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func action(place: MKPlacemark, annotation: MKAnnotationView) -> (() -> Void) {
+        annotationView = annotation
+        
+        let action = { [weak self] in
+            
+            annotation.setSelected(false, animated: true)
+            
+            self?.startAnimation()
+            annotation.isHidden = true
+            
+            guard let strongSelf = self else { return }
+            
+            strongSelf.client.getEarthImageData(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude) { data, error in
+                
+                DispatchQueue.main.async {
+                    
+                    let view = SateliteImageView()
+                    
+                    view.cancelAction = {
+                        strongSelf.close()
+                    }
+                    
+                    view.saveAction = {
+                        
+                        if let image = view.imageView.image {
+                            UIImageWriteToSavedPhotosAlbum(image, self, #selector(strongSelf.image(_:didFinishSavingWithError:contextInfo:)), nil)
+                            strongSelf.close()
+                        }
+                        
+
+                    }
+                    
+                    if let data = data {
+                        
+                        strongSelf.client.getImage(earthImageJSON: data) { imageData, error in
+                            
+                            DispatchQueue.main.async {
+                                
+                                guard let imageData = imageData, let image = UIImage(data: imageData), let superview = strongSelf.view else { return }
+                                view.imageView.image = image
+                                view.tag = 10
+                                
+                                superview.addSubview(view)
+                                
+                                if let view = superview.viewWithTag(20) {
+                                    self?.addClosingGestureTo(view: view)
+                                }
+                                
+                                view.centerXAnchor.constraint(equalTo: superview.centerXAnchor).isActive = true
+                                view.centerYAnchor.constraint(equalTo: superview.centerYAnchor).isActive = true
+                                
+                                annotation.isHidden = false
+                                annotation.setSelected(false, animated: true)
+                                self?.loadAnimation?.removeFromSuperview()
+                            }
+                            
+                        }
+                        
+                        
+                    }
+                }
+                
+            }
+            
+        }
+        
+        return action
+    }
+    
+    func addClosingGestureTo(view: UIView) {
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(closeModal))
+        view.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    @objc func closeModal() {
+        close()
+    }
+    
+    func close() {
+        let modalView = view.viewWithTag(10)
+        let darkenView = view.viewWithTag(20)
+        modalView?.removeFromSuperview()
+        darkenView?.removeFromSuperview()
+        annotationView?.setSelected(true, animated: true)
+    }
+    
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        
+        if let error = error {
+            let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default)
+            alertController.addAction(okAction)
+            present(alertController, animated: true)
+        } else {
+            let alertController = UIAlertController(title: "Saved", message: "The Satelite Image was saved!", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default)
+            alertController.addAction(okAction)
+            present(alertController, animated: true)
+        }
+        
+    }
+    
+    
+}
+
+extension EarthViewController: Dismissable {
+    
+    func dismissSearch() {
+        navigationBar?.navItem.leftBarButtonItem = NavBarButton.back.button(action: #selector(closeSearch))
+        searchBar.resignFirstResponder()
+        searchBar.isHidden = true
+        searchView.isHidden = true
+    }
+    
+}
+
+extension EarthViewController: HandleMapSearch {
+    
+    func dropInZoom(placemark: MKPlacemark) {
+        
+        dismissSearch()
+        
+        let annotation = SelectedLocationAnnotation(place: placemark)
+        
+        mapView.removeAnnotations(mapView.annotations)
+        mapView.addAnnotation(annotation)
+
+        mapView.selectAnnotation(annotation, animated: true)
+        
+        let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
+        
+        let region = MKCoordinateRegion(center: placemark.coordinate, span: span)
+        
+        mapView.setRegion(region, animated: true)
+    }
+    
+}
+
+extension EarthViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        let visibleLocation = MKCoordinateRegion(center: userLocation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+        mapView.setRegion(visibleLocation, animated: true)
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        if annotation is MKUserLocation { return nil }
+        
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "SearchedLocation")
+        
+        if annotationView == nil {
+            
+            annotationView = SelectedLocationAnnotationView(annotation: annotation, reuseIdentifier: "SearchedLocation", actionDelegate: self)
+            // Set Delegate
+        } else {
+            annotationView?.annotation = annotation
+        }
+        
+        return annotationView
+        
+    }
+    
+}

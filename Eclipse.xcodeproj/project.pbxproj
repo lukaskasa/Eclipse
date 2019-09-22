@@ -8,8 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		8000928D231011EB0043C1CA /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8000928C231011EB0043C1CA /* APIClient.swift */; };
+		80033312232F95FC007D3660 /* MarsWeatherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80033311232F95FC007D3660 /* MarsWeatherController.swift */; };
+		80033314232F9704007D3660 /* MarsWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80033313232F9704007D3660 /* MarsWeather.swift */; };
+		80033316232F9920007D3660 /* MarsSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80033315232F9920007D3660 /* MarsSceneView.swift */; };
+		8003331823315542007D3660 /* MarsWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8003331723315542007D3660 /* MarsWeatherCell.swift */; };
+		8003331C233156F5007D3660 /* MarsWeatherDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8003331B233156F5007D3660 /* MarsWeatherDelegate.swift */; };
+		8003331E2331571D007D3660 /* MarsWeatherDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8003331D2331571D007D3660 /* MarsWeatherDatasource.swift */; };
+		80050BE02333753E00586D6A /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80050BDF2333753E00586D6A /* String.swift */; };
+		80050BE22333F8C700586D6A /* MarsImageryFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80050BE12333F8C700586D6A /* MarsImageryFilter.swift */; };
+		8006C055231E5D2600E23E13 /* MarsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8006C054231E5D2600E23E13 /* MarsViewController.swift */; };
+		8006C057231E5EF100E23E13 /* MarsImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8006C056231E5EF100E23E13 /* MarsImageCell.swift */; };
+		8006C059231E617200E23E13 /* MarsImageryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8006C058231E617200E23E13 /* MarsImageryDelegate.swift */; };
+		8006C05B231E61CE00E23E13 /* MarsImageryDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8006C05A231E61CE00E23E13 /* MarsImageryDatasource.swift */; };
+		8006C05D231E624000E23E13 /* MarsImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8006C05C231E624000E23E13 /* MarsImage.swift */; };
+		8006C065231EA91300E23E13 /* ImageDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8006C064231EA91300E23E13 /* ImageDownload.swift */; };
+		8006C06A232105E500E23E13 /* LoadAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8006C069232105E500E23E13 /* LoadAnimation.swift */; };
+		8006C06C2322E08500E23E13 /* ImagePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8006C06B2322E08500E23E13 /* ImagePageViewController.swift */; };
+		8006C06E2323ABCE00E23E13 /* ImageViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8006C06D2323ABCE00E23E13 /* ImageViewerController.swift */; };
+		8006C0722323B5AF00E23E13 /* ImageEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8006C0712323B5AF00E23E13 /* ImageEditViewController.swift */; };
+		8006C0762328F2BB00E23E13 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8006C0752328F2BB00E23E13 /* NavigationBar.swift */; };
 		801E5500230162FD00170248 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801E54FF230162FD00170248 /* AppDelegate.swift */; };
-		801E5502230162FD00170248 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801E5501230162FD00170248 /* HomeViewController.swift */; };
+		801E5502230162FD00170248 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801E5501230162FD00170248 /* MainViewController.swift */; };
 		801E5505230162FD00170248 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 801E5503230162FD00170248 /* Main.storyboard */; };
 		801E5507230162FD00170248 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 801E5506230162FD00170248 /* Assets.xcassets */; };
 		801E550A230162FD00170248 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 801E5508230162FD00170248 /* LaunchScreen.storyboard */; };
@@ -21,7 +40,7 @@
 		805333E1230ED70A008835CE /* SelectedLocationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805333E0230ED709008835CE /* SelectedLocationAnnotation.swift */; };
 		805333E3230ED854008835CE /* SelectedLocationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805333E2230ED854008835CE /* SelectedLocationAnnotationView.swift */; };
 		805333E5230EEC8E008835CE /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805333E4230EEC8E008835CE /* UIView.swift */; };
-		808E9C582313097A008C9DE6 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808E9C572313097A008C9DE6 /* UIImageView.swift */; };
+		8098BD06232CDE7D00530547 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8098BD05232CDE7D00530547 /* UIImageView.swift */; };
 		80B07965231919F000892503 /* LocationAnnotationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80B07964231919F000892503 /* LocationAnnotationView.xib */; };
 		80C3998F231685E600F41E3B /* SateliteImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C3998E231685E600F41E3B /* SateliteImageView.swift */; };
 		80F8E62B231035D00038171D /* EarthImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8E62A231035D00038171D /* EarthImage.swift */; };
@@ -35,9 +54,28 @@
 
 /* Begin PBXFileReference section */
 		8000928C231011EB0043C1CA /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		80033311232F95FC007D3660 /* MarsWeatherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsWeatherController.swift; sourceTree = "<group>"; };
+		80033313232F9704007D3660 /* MarsWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsWeather.swift; sourceTree = "<group>"; };
+		80033315232F9920007D3660 /* MarsSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsSceneView.swift; sourceTree = "<group>"; };
+		8003331723315542007D3660 /* MarsWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsWeatherCell.swift; sourceTree = "<group>"; };
+		8003331B233156F5007D3660 /* MarsWeatherDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsWeatherDelegate.swift; sourceTree = "<group>"; };
+		8003331D2331571D007D3660 /* MarsWeatherDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsWeatherDatasource.swift; sourceTree = "<group>"; };
+		80050BDF2333753E00586D6A /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		80050BE12333F8C700586D6A /* MarsImageryFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsImageryFilter.swift; sourceTree = "<group>"; };
+		8006C054231E5D2600E23E13 /* MarsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsViewController.swift; sourceTree = "<group>"; };
+		8006C056231E5EF100E23E13 /* MarsImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsImageCell.swift; sourceTree = "<group>"; };
+		8006C058231E617200E23E13 /* MarsImageryDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsImageryDelegate.swift; sourceTree = "<group>"; };
+		8006C05A231E61CE00E23E13 /* MarsImageryDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsImageryDatasource.swift; sourceTree = "<group>"; };
+		8006C05C231E624000E23E13 /* MarsImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsImage.swift; sourceTree = "<group>"; };
+		8006C064231EA91300E23E13 /* ImageDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownload.swift; sourceTree = "<group>"; };
+		8006C069232105E500E23E13 /* LoadAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAnimation.swift; sourceTree = "<group>"; };
+		8006C06B2322E08500E23E13 /* ImagePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePageViewController.swift; sourceTree = "<group>"; };
+		8006C06D2323ABCE00E23E13 /* ImageViewerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerController.swift; sourceTree = "<group>"; };
+		8006C0712323B5AF00E23E13 /* ImageEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditViewController.swift; sourceTree = "<group>"; };
+		8006C0752328F2BB00E23E13 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		801E54FC230162FD00170248 /* Eclipse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eclipse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		801E54FF230162FD00170248 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		801E5501230162FD00170248 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		801E5501230162FD00170248 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		801E5504230162FD00170248 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		801E5506230162FD00170248 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		801E5509230162FD00170248 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -50,7 +88,7 @@
 		805333E0230ED709008835CE /* SelectedLocationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedLocationAnnotation.swift; sourceTree = "<group>"; };
 		805333E2230ED854008835CE /* SelectedLocationAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedLocationAnnotationView.swift; sourceTree = "<group>"; };
 		805333E4230EEC8E008835CE /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
-		808E9C572313097A008C9DE6 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		8098BD05232CDE7D00530547 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		80B07964231919F000892503 /* LocationAnnotationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationAnnotationView.xib; sourceTree = "<group>"; };
 		80C3998E231685E600F41E3B /* SateliteImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SateliteImageView.swift; sourceTree = "<group>"; };
 		80F8E62A231035D00038171D /* EarthImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarthImage.swift; sourceTree = "<group>"; };
@@ -78,6 +116,7 @@
 			children = (
 				80F8E63223111DBE0038171D /* Secrets.swift */,
 				80F8E63423111F9E0038171D /* Endpoint */,
+				8006C05E231EA23E00E23E13 /* Operations */,
 				80F8E62E23111BB90038171D /* NASAClient.swift */,
 				8000928C231011EB0043C1CA /* APIClient.swift */,
 				80F8E62C231118630038171D /* APIError.swift */,
@@ -94,10 +133,74 @@
 			path = MapAnnotation;
 			sourceTree = "<group>";
 		};
+		80033310232F95E5007D3660 /* Mars Weather */ = {
+			isa = PBXGroup;
+			children = (
+				80033311232F95FC007D3660 /* MarsWeatherController.swift */,
+			);
+			path = "Mars Weather";
+			sourceTree = "<group>";
+		};
+		80033319233156CB007D3660 /* Mars Rover Imagery */ = {
+			isa = PBXGroup;
+			children = (
+				8006C058231E617200E23E13 /* MarsImageryDelegate.swift */,
+				8006C05A231E61CE00E23E13 /* MarsImageryDatasource.swift */,
+			);
+			path = "Mars Rover Imagery";
+			sourceTree = "<group>";
+		};
+		8003331A233156E1007D3660 /* Mars Weather */ = {
+			isa = PBXGroup;
+			children = (
+				8003331B233156F5007D3660 /* MarsWeatherDelegate.swift */,
+				8003331D2331571D007D3660 /* MarsWeatherDatasource.swift */,
+			);
+			path = "Mars Weather";
+			sourceTree = "<group>";
+		};
+		8006C05E231EA23E00E23E13 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				8006C066231EAAAB00E23E13 /* Image Download */,
+			);
+			path = Operations;
+			sourceTree = "<group>";
+		};
+		8006C066231EAAAB00E23E13 /* Image Download */ = {
+			isa = PBXGroup;
+			children = (
+				8006C064231EA91300E23E13 /* ImageDownload.swift */,
+			);
+			path = "Image Download";
+			sourceTree = "<group>";
+		};
+		8006C06F2323AF8000E23E13 /* Eye in the sky */ = {
+			isa = PBXGroup;
+			children = (
+				801E55342302FD8D00170248 /* EarthViewController.swift */,
+				801E5536230328D200170248 /* LocationSearchController.swift */,
+			);
+			path = "Eye in the sky";
+			sourceTree = "<group>";
+		};
+		8006C0702323AFBF00E23E13 /* Rover Postcard Maker */ = {
+			isa = PBXGroup;
+			children = (
+				8006C054231E5D2600E23E13 /* MarsViewController.swift */,
+				8006C06B2322E08500E23E13 /* ImagePageViewController.swift */,
+				8006C06D2323ABCE00E23E13 /* ImageViewerController.swift */,
+				8006C0712323B5AF00E23E13 /* ImageEditViewController.swift */,
+			);
+			path = "Rover Postcard Maker";
+			sourceTree = "<group>";
+		};
 		801884C72305CE0D00523F79 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				80F8E62A231035D00038171D /* EarthImage.swift */,
+				8006C05C231E624000E23E13 /* MarsImage.swift */,
+				80033313232F9704007D3660 /* MarsWeather.swift */,
 				8000928E231012150043C1CA /* MapAnnotation */,
 			);
 			path = Models;
@@ -139,9 +242,10 @@
 		801E551123029FF800170248 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				801E5501230162FD00170248 /* HomeViewController.swift */,
-				801E55342302FD8D00170248 /* EarthViewController.swift */,
-				801E5536230328D200170248 /* LocationSearchController.swift */,
+				801E5501230162FD00170248 /* MainViewController.swift */,
+				8006C06F2323AF8000E23E13 /* Eye in the sky */,
+				8006C0702323AFBF00E23E13 /* Rover Postcard Maker */,
+				80033310232F95E5007D3660 /* Mars Weather */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -154,6 +258,9 @@
 				80B07964231919F000892503 /* LocationAnnotationView.xib */,
 				805333DC230E8522008835CE /* LocationAnnotationView.swift */,
 				80C3998E231685E600F41E3B /* SateliteImageView.swift */,
+				8006C069232105E500E23E13 /* LoadAnimation.swift */,
+				80033315232F9920007D3660 /* MarsSceneView.swift */,
+				80050BE12333F8C700586D6A /* MarsImageryFilter.swift */,
 				805333D9230DB71E008835CE /* Cells */,
 			);
 			path = Views;
@@ -162,6 +269,8 @@
 		805333D0230D6ED3008835CE /* Delegate & Datasource */ = {
 			isa = PBXGroup;
 			children = (
+				8003331A233156E1007D3660 /* Mars Weather */,
+				80033319233156CB007D3660 /* Mars Rover Imagery */,
 			);
 			path = "Delegate & Datasource";
 			sourceTree = "<group>";
@@ -169,6 +278,7 @@
 		805333D5230DB3BD008835CE /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				8006C0752328F2BB00E23E13 /* NavigationBar.swift */,
 				805333D6230DB3C9008835CE /* Extensions */,
 			);
 			path = Helper;
@@ -177,10 +287,11 @@
 		805333D6230DB3C9008835CE /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				80050BDF2333753E00586D6A /* String.swift */,
 				80F8E637231126180038171D /* Date.swift */,
 				805333D7230DB3E3008835CE /* MKPlacemark.swift */,
 				805333E4230EEC8E008835CE /* UIView.swift */,
-				808E9C572313097A008C9DE6 /* UIImageView.swift */,
+				8098BD05232CDE7D00530547 /* UIImageView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -189,6 +300,8 @@
 			isa = PBXGroup;
 			children = (
 				805333D1230D6EF0008835CE /* CurrentLocationCell.swift */,
+				8006C056231E5EF100E23E13 /* MarsImageCell.swift */,
+				8003331723315542007D3660 /* MarsWeatherCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -281,26 +394,45 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80050BE02333753E00586D6A /* String.swift in Sources */,
 				805333E5230EEC8E008835CE /* UIView.swift in Sources */,
 				80F8E63323111DBE0038171D /* Secrets.swift in Sources */,
 				805333E1230ED70A008835CE /* SelectedLocationAnnotation.swift in Sources */,
 				80F8E62B231035D00038171D /* EarthImage.swift in Sources */,
+				8003331823315542007D3660 /* MarsWeatherCell.swift in Sources */,
+				8006C06A232105E500E23E13 /* LoadAnimation.swift in Sources */,
+				8006C057231E5EF100E23E13 /* MarsImageCell.swift in Sources */,
+				8006C0722323B5AF00E23E13 /* ImageEditViewController.swift in Sources */,
 				801E5537230328D200170248 /* LocationSearchController.swift in Sources */,
 				8000928D231011EB0043C1CA /* APIClient.swift in Sources */,
 				805333D8230DB3E3008835CE /* MKPlacemark.swift in Sources */,
 				80F8E638231126180038171D /* Date.swift in Sources */,
-				801E5502230162FD00170248 /* HomeViewController.swift in Sources */,
+				801E5502230162FD00170248 /* MainViewController.swift in Sources */,
+				8006C05B231E61CE00E23E13 /* MarsImageryDatasource.swift in Sources */,
+				8006C06E2323ABCE00E23E13 /* ImageViewerController.swift in Sources */,
+				8098BD06232CDE7D00530547 /* UIImageView.swift in Sources */,
+				80033314232F9704007D3660 /* MarsWeather.swift in Sources */,
+				8006C055231E5D2600E23E13 /* MarsViewController.swift in Sources */,
+				8003331C233156F5007D3660 /* MarsWeatherDelegate.swift in Sources */,
+				80050BE22333F8C700586D6A /* MarsImageryFilter.swift in Sources */,
 				805333E3230ED854008835CE /* SelectedLocationAnnotationView.swift in Sources */,
+				8006C05D231E624000E23E13 /* MarsImage.swift in Sources */,
 				80F8E63623111FAF0038171D /* NASA.swift in Sources */,
+				80033316232F9920007D3660 /* MarsSceneView.swift in Sources */,
+				8006C059231E617200E23E13 /* MarsImageryDelegate.swift in Sources */,
+				8006C065231EA91300E23E13 /* ImageDownload.swift in Sources */,
 				80F8E62F23111BB90038171D /* NASAClient.swift in Sources */,
 				80F8E63123111C770038171D /* Endpoint.swift in Sources */,
 				805333D2230D6EF0008835CE /* CurrentLocationCell.swift in Sources */,
 				80C3998F231685E600F41E3B /* SateliteImageView.swift in Sources */,
+				8003331E2331571D007D3660 /* MarsWeatherDatasource.swift in Sources */,
 				801E5500230162FD00170248 /* AppDelegate.swift in Sources */,
 				801E55352302FD8D00170248 /* EarthViewController.swift in Sources */,
-				808E9C582313097A008C9DE6 /* UIImageView.swift in Sources */,
+				8006C0762328F2BB00E23E13 /* NavigationBar.swift in Sources */,
+				80033312232F95FC007D3660 /* MarsWeatherController.swift in Sources */,
 				805333DD230E8522008835CE /* LocationAnnotationView.swift in Sources */,
 				80F8E62D231118630038171D /* APIError.swift in Sources */,
+				8006C06C2322E08500E23E13 /* ImagePageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
