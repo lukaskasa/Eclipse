@@ -22,16 +22,17 @@ class MarsViewController: UICollectionViewController {
         return MarsImageryDatasource(images: [], collectionView: self.collectionView)
     }()
     
-    lazy var loadAnimation: LoadAnimation? = {
-        return LoadAnimation(for: self.view)
-    }()
+    var loadAnimation: LoadAnimation!
     
     var images: [MarsImage]? {
         didSet {
             delegate = MarsImageryDelegate()
             datasource.update(with: images!)
             collectionView.reloadData()
+            navigationBar?.rightButton = .controls
+            navigationBar?.load()
             loadAnimation?.stop()
+            view.viewWithTag(20)?.isHidden = true
         }
     }
     
@@ -49,7 +50,7 @@ class MarsViewController: UICollectionViewController {
         setupNavigationBar()
         setupCollectionView()
         marsFilter.setup()
-        addAction()
+        setFilterAction()
     }
     
     // MARK: - Navigation
@@ -71,14 +72,18 @@ class MarsViewController: UICollectionViewController {
     // MARK: - Helper Methods
     
     
-    
     func setupCollectionView() {
         self.collectionView.delegate = delegate
         self.collectionView.dataSource = datasource
     }
     
     func setupAnimation() {
-        guard let loadAnimation = loadAnimation else { return }
+        // TODO: Put into LoadAnimation object
+        let dimView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        dimView.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        dimView.tag = 20
+        view.addSubview(dimView)
+        loadAnimation = LoadAnimation(for: self.view)
         view.addSubview(loadAnimation)
         loadAnimation.translatesAutoresizingMaskIntoConstraints = false
         loadAnimation.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
@@ -86,7 +91,7 @@ class MarsViewController: UICollectionViewController {
     }
     
     func setupNavigationBar() {
-        navigationBar = NavigationBar(for: self.view, navigationBarStyle: .black, tintColor: .white, title: "Rover Postcard Maker", leftButton: .back, rightButton: .controls, leftButtonAction: #selector(exit), rightButtonAction: #selector(showPicker))
+        navigationBar = NavigationBar(for: self.view, navigationBarStyle: .black, tintColor: .white, title: "Rover Postcard Maker", leftButton: .back, rightButton: nil, leftButtonAction: #selector(exit), rightButtonAction: #selector(showPicker))
         navigationBar?.load()
     }
     
@@ -98,16 +103,16 @@ class MarsViewController: UICollectionViewController {
         marsFilter.open()
     }
     
-    func addAction() {
-        
+    func setFilterAction() {
         
         marsFilter.filterAction = {
             
             let selectedSol = self.marsFilter.sols[self.marsFilter.pickerView.selectedRow(inComponent: 0)]
             let selectedCamera = self.marsFilter.cameras[self.marsFilter.pickerView.selectedRow(inComponent: 1)]
-            print(selectedSol)
-            print(selectedCamera)
             
+            self.loadAnimation?.start()
+            self.view.viewWithTag(20)?.isHidden = false
+            self.navigationBar?.rightButton = nil
             
             self.client.getMarsImages(sol: selectedSol, camera: selectedCamera) { images, error in
                 
@@ -115,7 +120,6 @@ class MarsViewController: UICollectionViewController {
                     
                     DispatchQueue.main.async {
                         self.images = marsImageData.photos
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                         self.collectionView.reloadData()
                     }
                     
@@ -126,7 +130,6 @@ class MarsViewController: UICollectionViewController {
                 }
                 
             }
-            
             
         }
         

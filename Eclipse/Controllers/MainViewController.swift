@@ -15,6 +15,11 @@ class MainViewController: UIViewController {
     @IBOutlet weak var eyeInTheSkyView: UIView!
     @IBOutlet weak var roverPostcardMakerView: UIView!
     @IBOutlet weak var marsWeatherView: UIView!
+    @IBOutlet weak var marsTemperatureLabel: UILabel! {
+        didSet {
+            getLatestMarsTemperature()
+        }
+    }
     
     // MARK: - Properties
     let client = NASAClient()
@@ -31,21 +36,6 @@ class MainViewController: UIViewController {
         super.viewWillAppear(true)
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animate(alongsideTransition: { (context) -> Void in
-            
-            let orientation = UIApplication.shared.statusBarOrientation
-            
-            if orientation.isPortrait {
-                self.startStackView.axis = .vertical
-            } else if orientation.isLandscape {
-                self.startStackView.axis = .horizontal
-            }
-            
-        }, completion: nil)
-        
-    }
-    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
     }
@@ -55,6 +45,27 @@ class MainViewController: UIViewController {
     }
     
     // MARK: - Helper
+    
+    func getLatestMarsTemperature() {
+        
+        
+        client.getMarsWeather { weatherData, error in
+            
+            guard let weatherData = weatherData, let temperature = weatherData.sols.last?.temperature else { return }
+            let fahrenheit = temperature.averageTemperature
+            let celsius = temperature.averageTemperatureCelsius
+            
+            DispatchQueue.main.async {
+                self.marsTemperatureLabel.text = "\(fahrenheit) ℉ | \(celsius) ℃"
+            }
+            
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            
+        }
+        
+    }
     
     func addGestureRecognizers() {
         
@@ -94,7 +105,6 @@ class MainViewController: UIViewController {
                
                 DispatchQueue.main.async {
                     marsViewController.images = marsImageData.photos
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     marsViewController.collectionView.reloadData()
                 }
                 

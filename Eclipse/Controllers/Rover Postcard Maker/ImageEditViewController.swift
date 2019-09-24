@@ -114,8 +114,6 @@ class ImageEditViewController: UIViewController {
         // Text modification - End
         
         sendPostCard(finalPostcardImage)
-        
-        //UIImageWriteToSavedPhotosAlbum(finalPostcardImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {

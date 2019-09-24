@@ -16,8 +16,6 @@ class MarsImageCell: UICollectionViewCell {
     @IBOutlet weak var marsPhotoDateLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    // MARK: - Properties
-    
     // MARK: - View Life Cycle
     
     override func awakeFromNib() {
@@ -30,7 +28,7 @@ class MarsImageCell: UICollectionViewCell {
     
     func configure(from roverData: MarsImage) {
         marsPhotoImageView.image = roverData.image
-        marsPhotoDateLabel.text = "\(roverData.id)"
+        marsPhotoDateLabel.text = roverData.camera.name
     }
     
 }

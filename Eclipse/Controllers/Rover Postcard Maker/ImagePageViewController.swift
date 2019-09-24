@@ -30,7 +30,7 @@ class ImagePageViewController: UIPageViewController {
         //Setup
         dataSource = self
         setupNavigationBar()
-        setupDots(images.count)
+        setupPageIndicator(images.count)
         if let imageViewerController = imageViewerController(with: images[indexOfCurrentImage]) {
             setViewControllers([imageViewerController], direction: .forward, animated: true, completion: nil)
         }
@@ -77,7 +77,7 @@ class ImagePageViewController: UIPageViewController {
         view.viewWithTag(dotBaseTag + index)?.backgroundColor = brandColor
     }
     
-    func setupDots(_ number: Int) {
+    func setupPageIndicator(_ number: Int) {
 
         let dotView = UIStackView()
         
@@ -91,8 +91,8 @@ class ImagePageViewController: UIPageViewController {
         
         dotView.addSubview(backgroundView)
         
-        for index in 0...number {
-            let dot = self.dot(for: index)
+        for index in 0..<number {
+            let dot = self.bar(for: index)
             dotView.addArrangedSubview(dot)
             dot.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -113,11 +113,11 @@ class ImagePageViewController: UIPageViewController {
         setActiveDot(with: indexOfCurrentImage)
     }
     
-    func dot(for index: Int) -> UIView {
-        let dot = UIView(frame: CGRect(x: 0, y: 0, width: 5.0, height: 10.0))
-        dot.tag = dotBaseTag + index
-        dot.backgroundColor = .none
-        return dot
+    func bar(for index: Int) -> UIView {
+        let bar = UIView(frame: CGRect(x: 0, y: 0, width: 5.0, height: 10.0))
+        bar.tag = dotBaseTag + index
+        bar.backgroundColor = .none
+        return bar
     }
     
     @objc func dissmissImageView() {
@@ -128,6 +128,8 @@ class ImagePageViewController: UIPageViewController {
         guard let storyboard = storyboard else { return }
         
         let editController = storyboard.instantiateViewController(withIdentifier: String(describing: ImageEditViewController.self)) as! ImageEditViewController
+        
+        editController.modalPresentationStyle = .fullScreen
         editController.modalTransitionStyle = .crossDissolve
         editController.marsImage = images[indexOfCurrentImage]
         

@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 protocol HandleMapSearch: class {
     func dropInZoom(placemark: MKPlacemark)
@@ -23,9 +24,14 @@ class LocationSearchController: UITableViewController {
     private let locationResultCellReuseIdentifier = "LocationResultCell"
     private let currentLocationCellHeight: CGFloat = 44.0
     private let seachResultsCellHeight: CGFloat = 50.0
-    private let topMarginPortrait: CGFloat = 100.0
-    private let topMarginLandscape: CGFloat = 88.0
-    
+    private var topMarginPortrait: CGFloat {
+        if #available(iOS 13, *) {
+            return 112.0
+        } else {
+            return 100.0
+        }
+    }
+    let geocoder = CLGeocoder()
     var locationSearchResults = [MKMapItem]()
     var mapView: MKMapView?
 
@@ -43,11 +49,7 @@ class LocationSearchController: UITableViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        if UIDevice.current.orientation.isLandscape {
-            configureView(topMargin: topMarginLandscape)
-        } else {
-            configureView(topMargin: topMarginPortrait)
-        }
+        configureView(topMargin: topMarginPortrait)
     }
     
     // MARK: - Helper
@@ -133,7 +135,6 @@ extension LocationSearchController {
             cell.textLabel?.text = selectedItem.name
             cell.detailTextLabel?.text = selectedItem.parseAddress()
 
-            
             return cell
         }
         
@@ -145,10 +146,26 @@ extension LocationSearchController {
             let selectedItem = locationSearchResults[indexPath.row].placemark
             handleMapSearchDelegate?.dropInZoom(placemark: selectedItem)
         } else {
-            if let userLocationCoordinate = mapView?.userLocation.coordinate {
-                let selectedItem = MKPlacemark(coordinate: userLocationCoordinate)
-                handleMapSearchDelegate?.dropInZoom(placemark: selectedItem)
+            
+            if let userLocation = mapView?.userLocation.location {
+                
+                geocoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
+                    guard error == nil else {
+                        print(error!.localizedDescription)
+                        return
+                    }
+                    
+                    // Most geocoding requests contain only one result.
+                    if let firstPlacemark = placemarks?.first {
+                        let userPlacemark = MKPlacemark(placemark: firstPlacemark)
+                        self.handleMapSearchDelegate?.dropInZoom(placemark: userPlacemark)
+                    }
+                }
+                
             }
+
+            
+
         }
         
         dismiss(animated: true, completion: nil)

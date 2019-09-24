@@ -56,9 +56,11 @@ class LocationAnnotationView: UIView {
     // MARK: - Helper
 
     func configureFor(place: MKPlacemark) {
-        let city = place.locality ?? ""
-        let country = place.country ?? ""
-        locationTitleLabel.text = "\(city), \(country)"
+        if let city = place.locality, let country = place.country {
+            locationTitleLabel.text = "\(city), \(country)"
+        } else if let title = place.title {
+            locationTitleLabel.text = title
+        }
     }
     
 }

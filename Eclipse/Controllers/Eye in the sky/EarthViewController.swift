@@ -34,6 +34,10 @@ class EarthViewController: UIViewController {
     var locationSearchController: LocationSearchController?
     var loadAnimation: LoadAnimation?
     
+    lazy var locationManager: LocationManager = {
+        return LocationManager(delegate: self, viewController: self)
+    }()
+    
     lazy var searchController: UISearchController = {
         return UISearchController(searchResultsController: locationSearchController)
     }()
@@ -48,6 +52,7 @@ class EarthViewController: UIViewController {
         setupMap()
     }
     
+    // TODO: Remove?
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -70,18 +75,16 @@ class EarthViewController: UIViewController {
     }
     
     func setupSearchBar() {
+        var blurStyle: UIBlurEffect.Style = .dark
         locationSearchController?.mapView = mapView
-
         definesPresentationContext = true
+        searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
-        //searchController.dimsBackgroundDuringPresentation = false
-        //navigationBar?.navItem.searchController = searchController
 
         searchView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 56.0))
         searchView.backgroundColor = .clear
         searchView.isHidden = true
         // Add a blur effect to the searchView
-        var blurStyle: UIBlurEffect.Style = .dark
         
         if #available(iOS 13, *) {
             blurStyle = .systemChromeMaterialDark
@@ -109,13 +112,14 @@ class EarthViewController: UIViewController {
         textFieldInsideSearchBar?.textColor = .white
         searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
         searchBar.tintColor = .white
-        searchBar.barStyle = .blackTranslucent
+        searchBar.barStyle = .black
         searchBar.isTranslucent = true
 
         searchView.addSubview(searchBar)
     }
 
     func setupMap() {
+        getLocation()
         mapView.translatesAutoresizingMaskIntoConstraints = false
         mapView.showsUserLocation = true
         mapView.isZoomEnabled = true
@@ -141,13 +145,14 @@ class EarthViewController: UIViewController {
     
     @objc func search() {
         navigationBar?.navItem.leftBarButtonItem = NavBarButton.close.button(action: #selector(closeSearch))
-        searchBar.becomeFirstResponder()
         searchView.isHidden = false
         searchBar.isHidden = false
+        searchBar.text = " "
+        searchBar.becomeFirstResponder()
     }
     
     @objc func closeSearch() {
-        dismissSearch()
+        //dismissSearch()
         dismiss(animated: true, completion: nil)
     }
     
@@ -240,17 +245,51 @@ class EarthViewController: UIViewController {
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         
         if let error = error {
-            let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default)
-            alertController.addAction(okAction)
-            present(alertController, animated: true)
+            showAlert(with: "Error", and: error.localizedDescription)
         } else {
-            let alertController = UIAlertController(title: "Saved", message: "The Satelite Image was saved!", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default)
-            alertController.addAction(okAction)
-            present(alertController, animated: true)
+            showAlert(with: "Saved", and: "The Satelite Image was saved!")
         }
         
+    }
+    
+    
+}
+
+extension EarthViewController: LocationManagerDelegate {
+    
+    func obtainedCoordinates(_ coordinate: Coordinate) {
+    }
+    
+    func failedWithError(_ error: LocationError) {
+        showAlert(with: "Location Error", and: "Error while getting your location")
+    }
+    
+    // MARK: - Helper
+    
+    func locationServicesAvailable() -> Bool {
+        if !locationManager.isAuthorized {
+            do {
+                try locationManager.requestLocationAuthorization()
+            } catch LocationError.disallowedByUser {
+                showSettingsAlert(with: "No Access", and: "Please allow location services in the settings to proceed.")
+            }
+            catch LocationError.locationServicesUnavailable {
+                showSettingsAlert(with: "Location services unavailable", and: "Please enable location services to use region monitoring.")
+            } catch {
+                fatalError()
+            }
+        } else {
+            return true
+        }
+        
+        return false
+    }
+    
+    /// Request the current location
+    func getLocation() {
+        if locationServicesAvailable() {
+            locationManager.requestLocation()
+        }
     }
     
     
@@ -260,6 +299,7 @@ extension EarthViewController: Dismissable {
     
     func dismissSearch() {
         navigationBar?.navItem.leftBarButtonItem = NavBarButton.back.button(action: #selector(closeSearch))
+        searchBar.text = ""
         searchBar.resignFirstResponder()
         searchBar.isHidden = true
         searchView.isHidden = true

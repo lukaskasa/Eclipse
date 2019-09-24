@@ -49,13 +49,13 @@ class NavigationBar {
     let navigationBarStyle: UIBarStyle
     let tintColor: UIColor
     var leftButton: NavBarButton?
-    var rightButton: NavBarButton
+    var rightButton: NavBarButton?
     var leftButtonAction: Selector?
     var rightButtonAction: Selector?
     
     let mainView: UIView
 
-    init(for mainView: UIView, navigationBarStyle: UIBarStyle = .black, tintColor: UIColor = .white, title: String, leftButton: NavBarButton?, rightButton: NavBarButton, leftButtonAction: Selector?, rightButtonAction: Selector?) {
+    init(for mainView: UIView, navigationBarStyle: UIBarStyle = .black, tintColor: UIColor = .white, title: String, leftButton: NavBarButton?, rightButton: NavBarButton?, leftButtonAction: Selector?, rightButtonAction: Selector?) {
         self.mainView = mainView
         self.navigationBarStyle = navigationBarStyle
         self.tintColor = tintColor
@@ -77,7 +77,7 @@ class NavigationBar {
     private func configureNavBar() {
         navItem.title = title
         navItem.leftBarButtonItem = leftButton?.button(action: leftButtonAction)
-        navItem.rightBarButtonItem = rightButton.button(action: rightButtonAction)
+        navItem.rightBarButtonItem = rightButton?.button(action: rightButtonAction)
         navBar.barStyle = navigationBarStyle
         navBar.tintColor = tintColor
         navBar.setItems([navItem], animated: true)

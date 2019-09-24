@@ -40,6 +40,10 @@
 		805333E1230ED70A008835CE /* SelectedLocationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805333E0230ED709008835CE /* SelectedLocationAnnotation.swift */; };
 		805333E3230ED854008835CE /* SelectedLocationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805333E2230ED854008835CE /* SelectedLocationAnnotationView.swift */; };
 		805333E5230EEC8E008835CE /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805333E4230EEC8E008835CE /* UIView.swift */; };
+		807378D023392602000CF477 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807378CF23392602000CF477 /* LocationManager.swift */; };
+		807378D323392849000CF477 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807378D223392849000CF477 /* Coordinate.swift */; };
+		807378D623392A65000CF477 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 807378D523392A65000CF477 /* MapKit.framework */; };
+		807378D823392EAB000CF477 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807378D723392EAB000CF477 /* UIViewController.swift */; };
 		8098BD06232CDE7D00530547 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8098BD05232CDE7D00530547 /* UIImageView.swift */; };
 		80B07965231919F000892503 /* LocationAnnotationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80B07964231919F000892503 /* LocationAnnotationView.xib */; };
 		80C3998F231685E600F41E3B /* SateliteImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C3998E231685E600F41E3B /* SateliteImageView.swift */; };
@@ -88,6 +92,10 @@
 		805333E0230ED709008835CE /* SelectedLocationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedLocationAnnotation.swift; sourceTree = "<group>"; };
 		805333E2230ED854008835CE /* SelectedLocationAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedLocationAnnotationView.swift; sourceTree = "<group>"; };
 		805333E4230EEC8E008835CE /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		807378CF23392602000CF477 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		807378D223392849000CF477 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
+		807378D523392A65000CF477 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		807378D723392EAB000CF477 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		8098BD05232CDE7D00530547 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		80B07964231919F000892503 /* LocationAnnotationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationAnnotationView.xib; sourceTree = "<group>"; };
 		80C3998E231685E600F41E3B /* SateliteImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SateliteImageView.swift; sourceTree = "<group>"; };
@@ -105,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				807378D623392A65000CF477 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +220,7 @@
 			children = (
 				801E54FE230162FD00170248 /* Eclipse */,
 				801E54FD230162FD00170248 /* Products */,
+				807378D423392A65000CF477 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -227,7 +237,7 @@
 			children = (
 				801E54FF230162FD00170248 /* AppDelegate.swift */,
 				8000928B231011C70043C1CA /* Networking */,
-				805333D5230DB3BD008835CE /* Helper */,
+				805333D5230DB3BD008835CE /* Utilities */,
 				805333D0230D6ED3008835CE /* Delegate & Datasource */,
 				801884C72305CE0D00523F79 /* Models */,
 				801E55122302A00800170248 /* Views */,
@@ -275,13 +285,14 @@
 			path = "Delegate & Datasource";
 			sourceTree = "<group>";
 		};
-		805333D5230DB3BD008835CE /* Helper */ = {
+		805333D5230DB3BD008835CE /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				807378D123392812000CF477 /* Location */,
 				8006C0752328F2BB00E23E13 /* NavigationBar.swift */,
 				805333D6230DB3C9008835CE /* Extensions */,
 			);
-			path = Helper;
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		805333D6230DB3C9008835CE /* Extensions */ = {
@@ -292,6 +303,7 @@
 				805333D7230DB3E3008835CE /* MKPlacemark.swift */,
 				805333E4230EEC8E008835CE /* UIView.swift */,
 				8098BD05232CDE7D00530547 /* UIImageView.swift */,
+				807378D723392EAB000CF477 /* UIViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -304,6 +316,23 @@
 				8003331723315542007D3660 /* MarsWeatherCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		807378D123392812000CF477 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				807378D223392849000CF477 /* Coordinate.swift */,
+				807378CF23392602000CF477 /* LocationManager.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		807378D423392A65000CF477 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				807378D523392A65000CF477 /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		808E9C5623127A2A008C9DE6 /* Tests */ = {
@@ -406,7 +435,9 @@
 				801E5537230328D200170248 /* LocationSearchController.swift in Sources */,
 				8000928D231011EB0043C1CA /* APIClient.swift in Sources */,
 				805333D8230DB3E3008835CE /* MKPlacemark.swift in Sources */,
+				807378D023392602000CF477 /* LocationManager.swift in Sources */,
 				80F8E638231126180038171D /* Date.swift in Sources */,
+				807378D823392EAB000CF477 /* UIViewController.swift in Sources */,
 				801E5502230162FD00170248 /* MainViewController.swift in Sources */,
 				8006C05B231E61CE00E23E13 /* MarsImageryDatasource.swift in Sources */,
 				8006C06E2323ABCE00E23E13 /* ImageViewerController.swift in Sources */,
@@ -421,6 +452,7 @@
 				80033316232F9920007D3660 /* MarsSceneView.swift in Sources */,
 				8006C059231E617200E23E13 /* MarsImageryDelegate.swift in Sources */,
 				8006C065231EA91300E23E13 /* ImageDownload.swift in Sources */,
+				807378D323392849000CF477 /* Coordinate.swift in Sources */,
 				80F8E62F23111BB90038171D /* NASAClient.swift in Sources */,
 				80F8E63123111C770038171D /* Endpoint.swift in Sources */,
 				805333D2230D6EF0008835CE /* CurrentLocationCell.swift in Sources */,
@@ -581,6 +613,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 95K8REC8NW;
 				INFOPLIST_FILE = Eclipse/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -599,6 +632,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 95K8REC8NW;
 				INFOPLIST_FILE = Eclipse/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -62,7 +62,8 @@ class MarsImageryFilter: NSObject {
     func addSetButtonOnKeyboard() {
         // TODO: Adjust size for other sizes
         let setToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 50))
-        setToolbar.barStyle = UIBarStyle.blackTranslucent
+        setToolbar.barStyle = .black
+        setToolbar.isTranslucent = true
         setToolbar.tintColor = UIColor.white
         
         let cancel = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.cancel, target: self, action: #selector(close))

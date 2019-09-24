@@ -20,6 +20,7 @@ class LoadAnimation: UIView {
     convenience init(for view: UIView) {
         self.init(frame: CGRect(x: 0, y: 0, width: 50.0, height: 50.0))
         setupViews()
+        initAnimation()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -58,12 +59,13 @@ class LoadAnimation: UIView {
     }
     
     func start() {
-        initAnimation()
+        self.isHidden = false
+        animator.startAnimation()
     }
     
     func stop() {
-        animator.stopAnimation(true)
-        self.removeFromSuperview()
+        animator = nil
+        self.isHidden = true
     }
     
 }
