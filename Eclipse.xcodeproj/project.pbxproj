@@ -40,6 +40,7 @@
 		805333E1230ED70A008835CE /* SelectedLocationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805333E0230ED709008835CE /* SelectedLocationAnnotation.swift */; };
 		805333E3230ED854008835CE /* SelectedLocationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805333E2230ED854008835CE /* SelectedLocationAnnotationView.swift */; };
 		805333E5230EEC8E008835CE /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805333E4230EEC8E008835CE /* UIView.swift */; };
+		8059CBFB233A1BCE009FFFAA /* EclipseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8059CBFA233A1BCE009FFFAA /* EclipseTests.swift */; };
 		807378D023392602000CF477 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807378CF23392602000CF477 /* LocationManager.swift */; };
 		807378D323392849000CF477 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807378D223392849000CF477 /* Coordinate.swift */; };
 		807378D623392A65000CF477 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 807378D523392A65000CF477 /* MapKit.framework */; };
@@ -55,6 +56,16 @@
 		80F8E63623111FAF0038171D /* NASA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8E63523111FAF0038171D /* NASA.swift */; };
 		80F8E638231126180038171D /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8E637231126180038171D /* Date.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8059CBF2233A1B0A009FFFAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 801E54F4230162FD00170248 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 801E54FB230162FD00170248;
+			remoteInfo = Eclipse;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		8000928C231011EB0043C1CA /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
@@ -92,6 +103,9 @@
 		805333E0230ED709008835CE /* SelectedLocationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedLocationAnnotation.swift; sourceTree = "<group>"; };
 		805333E2230ED854008835CE /* SelectedLocationAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedLocationAnnotationView.swift; sourceTree = "<group>"; };
 		805333E4230EEC8E008835CE /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		8059CBED233A1B0A009FFFAA /* EclipseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EclipseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8059CBF1233A1B0A009FFFAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8059CBFA233A1BCE009FFFAA /* EclipseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EclipseTests.swift; sourceTree = "<group>"; };
 		807378CF23392602000CF477 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		807378D223392849000CF477 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
 		807378D523392A65000CF477 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -114,6 +128,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				807378D623392A65000CF477 /* MapKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8059CBEA233A1B0A009FFFAA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,7 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				801E54FE230162FD00170248 /* Eclipse */,
-				801E54FD230162FD00170248 /* Products */,
+				8059CBEE233A1B0A009FFFAA /* EclipseTests */,
 				807378D423392A65000CF477 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -228,8 +249,10 @@
 			isa = PBXGroup;
 			children = (
 				801E54FC230162FD00170248 /* Eclipse.app */,
+				8059CBED233A1B0A009FFFAA /* EclipseTests.xctest */,
 			);
 			name = Products;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		801E54FE230162FD00170248 /* Eclipse */ = {
@@ -242,7 +265,6 @@
 				801884C72305CE0D00523F79 /* Models */,
 				801E55122302A00800170248 /* Views */,
 				801E551123029FF800170248 /* Controllers */,
-				808E9C5623127A2A008C9DE6 /* Tests */,
 				801E5506230162FD00170248 /* Assets.xcassets */,
 				801E550B230162FD00170248 /* Info.plist */,
 			);
@@ -318,6 +340,16 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		8059CBEE233A1B0A009FFFAA /* EclipseTests */ = {
+			isa = PBXGroup;
+			children = (
+				801E54FD230162FD00170248 /* Products */,
+				8059CBFA233A1BCE009FFFAA /* EclipseTests.swift */,
+				8059CBF1233A1B0A009FFFAA /* Info.plist */,
+			);
+			path = EclipseTests;
+			sourceTree = "<group>";
+		};
 		807378D123392812000CF477 /* Location */ = {
 			isa = PBXGroup;
 			children = (
@@ -333,13 +365,6 @@
 				807378D523392A65000CF477 /* MapKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		808E9C5623127A2A008C9DE6 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Tests;
 			sourceTree = "<group>";
 		};
 		80F8E63423111F9E0038171D /* Endpoint */ = {
@@ -371,18 +396,41 @@
 			productReference = 801E54FC230162FD00170248 /* Eclipse.app */;
 			productType = "com.apple.product-type.application";
 		};
+		8059CBEC233A1B0A009FFFAA /* EclipseTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8059CBF4233A1B0A009FFFAA /* Build configuration list for PBXNativeTarget "EclipseTests" */;
+			buildPhases = (
+				8059CBE9233A1B0A009FFFAA /* Sources */,
+				8059CBEA233A1B0A009FFFAA /* Frameworks */,
+				8059CBEB233A1B0A009FFFAA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8059CBF3233A1B0A009FFFAA /* PBXTargetDependency */,
+			);
+			name = EclipseTests;
+			productName = EclipseTests;
+			productReference = 8059CBED233A1B0A009FFFAA /* EclipseTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		801E54F4230162FD00170248 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1030;
+				LastSwiftUpdateCheck = 1100;
 				LastUpgradeCheck = 1030;
 				ORGANIZATIONNAME = "Lukas Kasakaitis";
 				TargetAttributes = {
 					801E54FB230162FD00170248 = {
 						CreatedOnToolsVersion = 10.3;
+					};
+					8059CBEC233A1B0A009FFFAA = {
+						CreatedOnToolsVersion = 11.0;
+						LastSwiftMigration = 1100;
+						TestTargetID = 801E54FB230162FD00170248;
 					};
 				};
 			};
@@ -400,6 +448,7 @@
 			projectRoot = "";
 			targets = (
 				801E54FB230162FD00170248 /* Eclipse */,
+				8059CBEC233A1B0A009FFFAA /* EclipseTests */,
 			);
 		};
 /* End PBXProject section */
@@ -413,6 +462,13 @@
 				801E5507230162FD00170248 /* Assets.xcassets in Resources */,
 				80B07965231919F000892503 /* LocationAnnotationView.xib in Resources */,
 				801E5505230162FD00170248 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8059CBEB233A1B0A009FFFAA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,7 +524,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8059CBE9233A1B0A009FFFAA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8059CBFB233A1BCE009FFFAA /* EclipseTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8059CBF3233A1B0A009FFFAA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 801E54FB230162FD00170248 /* Eclipse */;
+			targetProxy = 8059CBF2233A1B0A009FFFAA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		801E5503230162FD00170248 /* Main.storyboard */ = {
@@ -644,6 +716,51 @@
 			};
 			name = Release;
 		};
+		8059CBF5233A1B0A009FFFAA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 95K8REC8NW;
+				INFOPLIST_FILE = EclipseTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lukaskasakaitis.EclipseTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Eclipse.app/Eclipse";
+			};
+			name = Debug;
+		};
+		8059CBF6233A1B0A009FFFAA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 95K8REC8NW;
+				INFOPLIST_FILE = EclipseTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lukaskasakaitis.EclipseTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Eclipse.app/Eclipse";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -661,6 +778,15 @@
 			buildConfigurations = (
 				801E550F230162FD00170248 /* Debug */,
 				801E5510230162FD00170248 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8059CBF4233A1B0A009FFFAA /* Build configuration list for PBXNativeTarget "EclipseTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8059CBF5233A1B0A009FFFAA /* Debug */,
+				8059CBF6233A1B0A009FFFAA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

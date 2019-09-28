@@ -45,6 +45,7 @@ class LocationSearchController: UITableViewController {
         // Setup
         tableView.backgroundColor = .clear
         view.backgroundColor = .clear
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -61,7 +62,7 @@ class LocationSearchController: UITableViewController {
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         tableView.frame = CGRect(x: 0, y: topMargin, width: screenWidth, height: screenHeight)
     }
-    
+
 }
 
 extension LocationSearchController: UISearchResultsUpdating, UISearchBarDelegate {
@@ -74,7 +75,7 @@ extension LocationSearchController: UISearchResultsUpdating, UISearchBarDelegate
         }
         
         if !searchTerm.isEmpty {
-            
+            dump(tableView)
             // Configure search request
             let request = MKLocalSearch.Request()
             request.naturalLanguageQuery = searchTerm
@@ -126,15 +127,15 @@ extension LocationSearchController {
         
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: CurrentLocationCell.reuseIdentifier, for: indexPath) as! CurrentLocationCell
+            
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: locationResultCellReuseIdentifier, for: indexPath)
             
             let selectedItem = locationSearchResults[indexPath.row].placemark
-            
             cell.textLabel?.text = selectedItem.name
             cell.detailTextLabel?.text = selectedItem.parseAddress()
-
+            
             return cell
         }
         
@@ -180,7 +181,6 @@ extension LocationSearchController {
         
         return seachResultsCellHeight
     }
-    
     
     
 }

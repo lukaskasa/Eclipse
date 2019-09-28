@@ -35,20 +35,15 @@ class NASAClient: APIClient {
                 return
             }
             
-            if error != nil {
-                print(error!.localizedDescription)
-            }
-            
             do {
-                
                 let imageInfo = try self.jsonDecoder.decode(EarthImage.self, from: data)
                 completion(imageInfo, nil)
-                
-                
             } catch {
-                
-                print("Parsing failed")
-                
+               completion(nil, .jsonParsingFailure)
+            }
+            
+            if error != nil {
+                print(error!.localizedDescription)
             }
             
         }
@@ -117,8 +112,6 @@ class NASAClient: APIClient {
         
         let endpoint = NASA.marsWeather
         
-        print(endpoint.request)
-        
         performRequest(with: endpoint.request) { sols, error in
             
             if let sols = sols {
@@ -153,7 +146,7 @@ class NASAClient: APIClient {
      
      - Returns: Void
      */
-    private func performRequest(with request: URLRequest, completion: @escaping (Data?, APIError?) -> Void) {
+    func performRequest(with request: URLRequest, completion: @escaping (Data?, APIError?) -> Void) {
         
         let task = dataTask(with: request) { data, error in
             

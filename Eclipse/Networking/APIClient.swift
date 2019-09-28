@@ -47,7 +47,6 @@ extension APIClient {
                 }
                 
             } else {
-                print("Unsuccessful :( - Status Code: \(httpResponse.statusCode)")
                 completion(nil, .responseUnsuccessful)
             }
             

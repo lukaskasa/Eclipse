@@ -74,6 +74,10 @@ class MarsTemperature: Decodable {
     var minTemperature: Double
     var maxTemperature: Double
     
+    var averageTemperatureFahrenheit: Double
+    var minTemperatureFahrenheit: Double
+    var maxTemperatureFahrenheit: Double
+    
     var averageTemperatureCelsius: Double {
         let temperature = ((averageTemperature - 32) * (5/9)) * 1000
         return Double(round(temperature) / 1000)
@@ -81,26 +85,11 @@ class MarsTemperature: Decodable {
     
     var minTemperatureCelsius: Double {
         let temperature = ((minTemperature - 32) * (5/9)) * 1000
-        return Double(round(temperature / 1000))
+        return Double(round(temperature) / 1000)
     }
     
     var maxTemperatureCelsius: Double {
         let temperature = ((maxTemperature - 32) * (5/9)) * 1000
-        return Double(round(temperature) / 1000)
-    }
-    
-    var averageTemperatureFahrenheit: Double {
-        let temperature = ((averageTemperature * (9/5)) + 32) * 1000
-        return Double(round(temperature) / 1000)
-    }
-    
-    var minTemperatureFahrenheit: Double {
-        let temperature = ((minTemperature * (9/5)) + 32) * 1000
-        return Double(round(temperature) / 1000)
-    }
-    
-    var maxTemperatureFahrenheit: Double {
-        let temperature = ((maxTemperature * (9/5)) + 32) * 1000
         return Double(round(temperature) / 1000)
     }
     
@@ -110,10 +99,13 @@ class MarsTemperature: Decodable {
         case maxTemperature = "mx"
     }
     
-    init(averageTemperature: Double, minTemperature: Double, maxTemperature: Double) {
+    init(averageTemperature: Double, minTemperature: Double, maxTemperature: Double, averageTemperatureFahrenheit: Double, minTemperatureFahrenheit: Double, maxTemperatureFahrenheit: Double) {
         self.averageTemperature = averageTemperature
         self.minTemperature = minTemperature
         self.maxTemperature = maxTemperature
+        self.averageTemperatureFahrenheit = averageTemperatureFahrenheit
+        self.minTemperatureFahrenheit = minTemperatureFahrenheit
+        self.maxTemperatureFahrenheit = maxTemperatureFahrenheit
     }
     
     required init(from decoder: Decoder) throws {
@@ -121,6 +113,9 @@ class MarsTemperature: Decodable {
         averageTemperature = try container.decode(Double.self, forKey: .averageTemperature)
         minTemperature = try container.decode(Double.self, forKey:  .minTemperature)
         maxTemperature = try container.decode(Double.self, forKey: .maxTemperature)
+        averageTemperatureFahrenheit = averageTemperature
+        minTemperatureFahrenheit = minTemperature
+        maxTemperatureFahrenheit = maxTemperature
     }
     
 }

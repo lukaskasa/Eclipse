@@ -75,7 +75,6 @@ class EarthViewController: UIViewController {
     }
     
     func setupSearchBar() {
-        var blurStyle: UIBlurEffect.Style = .dark
         locationSearchController?.mapView = mapView
         definesPresentationContext = true
         searchController.obscuresBackgroundDuringPresentation = false
@@ -84,8 +83,9 @@ class EarthViewController: UIViewController {
         searchView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 56.0))
         searchView.backgroundColor = .clear
         searchView.isHidden = true
-        // Add a blur effect to the searchView
         
+        // Add a blur effect to the searchView
+        var blurStyle: UIBlurEffect.Style = .dark
         if #available(iOS 13, *) {
             blurStyle = .systemChromeMaterialDark
         }
@@ -147,7 +147,6 @@ class EarthViewController: UIViewController {
         navigationBar?.navItem.leftBarButtonItem = NavBarButton.close.button(action: #selector(closeSearch))
         searchView.isHidden = false
         searchBar.isHidden = false
-        searchBar.text = " "
         searchBar.becomeFirstResponder()
     }
     

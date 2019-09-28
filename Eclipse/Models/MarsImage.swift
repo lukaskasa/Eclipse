@@ -14,7 +14,6 @@ struct MarsImages: Decodable {
 
 struct MarsRoverCamera: Decodable {
     let name: String
-    //let fullName: String
 }
 
 class MarsImage: Decodable {
