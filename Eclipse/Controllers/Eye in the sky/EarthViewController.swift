@@ -69,7 +69,7 @@ class EarthViewController: UIViewController {
     }
     
     func setupNavigationBar() {
-        navigationBar = NavigationBar(for: self.view, title: "Eye in the sky", leftButton: .back, rightButton: .search, leftButtonAction: #selector(closeSearch), rightButtonAction: #selector(search))
+        navigationBar = NavigationBar(for: self.view, title: "Eye in the sky", leftButton: .back, rightButton: .search, leftButtonAction: #selector(mainMenu), rightButtonAction: #selector(search))
         navigationBar?.load()
         setupSearchBar()
     }
@@ -151,7 +151,10 @@ class EarthViewController: UIViewController {
     }
     
     @objc func closeSearch() {
-        //dismissSearch()
+        dismissSearch(true)
+    }
+    
+    @objc func mainMenu() {
         dismiss(animated: true, completion: nil)
     }
     
@@ -296,12 +299,13 @@ extension EarthViewController: LocationManagerDelegate {
 
 extension EarthViewController: Dismissable {
     
-    func dismissSearch() {
-        navigationBar?.navItem.leftBarButtonItem = NavBarButton.back.button(action: #selector(closeSearch))
+    func dismissSearch(_ force: Bool) {
+        if force { dismiss(animated: true, completion: nil) }
         searchBar.text = ""
         searchBar.resignFirstResponder()
         searchBar.isHidden = true
         searchView.isHidden = true
+        navigationBar?.navItem.leftBarButtonItem = NavBarButton.back.button(action: #selector(mainMenu))
     }
     
 }
@@ -310,7 +314,7 @@ extension EarthViewController: HandleMapSearch {
     
     func dropInZoom(placemark: MKPlacemark) {
         
-        dismissSearch()
+        dismissSearch(false)
         
         let annotation = SelectedLocationAnnotation(place: placemark)
         

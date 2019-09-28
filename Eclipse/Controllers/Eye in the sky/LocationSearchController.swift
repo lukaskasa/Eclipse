@@ -15,7 +15,7 @@ protocol HandleMapSearch: class {
 }
 
 protocol Dismissable: class {
-    func dismissSearch() -> Void
+    func dismissSearch(_ force: Bool) -> Void
 }
 
 class LocationSearchController: UITableViewController {
@@ -45,7 +45,6 @@ class LocationSearchController: UITableViewController {
         // Setup
         tableView.backgroundColor = .clear
         view.backgroundColor = .clear
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -68,6 +67,7 @@ class LocationSearchController: UITableViewController {
 extension LocationSearchController: UISearchResultsUpdating, UISearchBarDelegate {
     
     func updateSearchResults(for searchController: UISearchController) {
+        tableView.isHidden = false
         
         guard let mapView = mapView, let searchTerm = searchController.searchBar.text else {
             return
@@ -75,7 +75,6 @@ extension LocationSearchController: UISearchResultsUpdating, UISearchBarDelegate
         }
         
         if !searchTerm.isEmpty {
-            dump(tableView)
             // Configure search request
             let request = MKLocalSearch.Request()
             request.naturalLanguageQuery = searchTerm
@@ -100,9 +99,7 @@ extension LocationSearchController: UISearchResultsUpdating, UISearchBarDelegate
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        dismissableDelegate?.dismissSearch()
-        searchBar.isHidden = true
+        dismissableDelegate?.dismissSearch(false)
     }
     
 }
