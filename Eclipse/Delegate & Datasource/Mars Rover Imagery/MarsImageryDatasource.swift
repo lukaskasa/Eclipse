@@ -10,21 +10,33 @@ import UIKit
 
 class MarsImageryDatasource: NSObject, UICollectionViewDataSource {
     
-    // MARK: - Properties
-    
+    /// Properties
     let pendingOperations = PendingOperations()
     let collectionView: UICollectionView
-    var images: [MarsImage]
+    var images: [MarsRoverImage]
     
-    init(images: [MarsImage], collectionView: UICollectionView) {
+    /**
+     Initializes a UICollectionViewDataource Object for the Mars Imagery
+     
+     - Parameters:
+        - images: Array of MarsRoverImage objects
+        - collectionView: UICollectionView used to display the data
+     
+     - Returns:  A UICollectionViewDataource Object
+     */
+    init(images: [MarsRoverImage], collectionView: UICollectionView) {
         self.images = images
         self.collectionView = collectionView
     }
     
+    /// Asks your data source object for the number of items in the specified section.
+    /// Apple documentation: https://developer.apple.com/documentation/uikit/uicollectionviewdatasource/1618058-collectionview
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count
     }
     
+    /// Asks your data source object for the cell that corresponds to the specified item in the collection view.
+    /// Apple documentation: https://developer.apple.com/documentation/uikit/uicollectionviewdatasource/1618029-collectionview
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MarsImageCell.self), for: indexPath) as! MarsImageCell
@@ -47,11 +59,28 @@ class MarsImageryDatasource: NSObject, UICollectionViewDataSource {
     
     // MARK: - Helper
     
-    func update(with images: [MarsImage]) {
+    /**
+     Feed the images array with new data
+     
+     - Parameters:
+        - images: MarsRoverImage Array
+     
+     - Returns: Void
+     */
+    func update(with images: [MarsRoverImage]) {
         self.images = images
     }
     
-    func downloadMarsImage(for roverData: MarsImage, at indexPath: IndexPath) {
+    /**
+     Starts the download operation for each MarsRoverImage object at a particular IndexPath
+     
+     - Parameters:
+        - roverData: The Mars Rover Image used to download the particular image
+        - indexPath: IndexPath of particular collectionview cell
+     
+     - Returns: Void
+     */
+    func downloadMarsImage(for roverData: MarsRoverImage, at indexPath: IndexPath) {
         
         guard pendingOperations.downloadsInProgress[indexPath] == nil else { return }
         

@@ -8,6 +8,7 @@
 
 import CoreLocation
 
+/// Struct representing a geographical coordinate consisting of a latitude and longitude
 struct Coordinate {
     let latitude: Double
     let longitude: Double
@@ -15,6 +16,8 @@ struct Coordinate {
 
 extension Coordinate {
     
+    /// Initalizer implementation which takes a CLLocation and extracts the latitude and longitude from it
+    /// Returns a Coordinate object
     init(with location: CLLocation) {
         self.latitude = location.coordinate.latitude
         self.longitude = location.coordinate.longitude

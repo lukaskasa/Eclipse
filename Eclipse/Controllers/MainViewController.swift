@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SystemConfiguration
 
 class MainViewController: UIViewController {
     
@@ -28,8 +29,13 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        // Setup
         addGestureRecognizers()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        checkForInternetConnection()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,8 +52,18 @@ class MainViewController: UIViewController {
     
     // MARK: - Helper
     
+    /// Check if internet connection is available
+    func checkForInternetConnection() {
+        if Reachability.sharedInstance.isConnectedToNetwork() {
+            startStackView.isUserInteractionEnabled = true
+        } else {
+            startStackView.isUserInteractionEnabled = false
+            showSettingsAlert(with: "No internet connection", and: "To use this applcation you requrie a working internet connection.")
+        }
+    }
+    
+    /// Gets and displays the latest temperature information avalable from the NASA Insight API
     func getLatestMarsTemperature() {
-        
         
         client.getMarsWeather { weatherData, error in
             
@@ -67,22 +83,24 @@ class MainViewController: UIViewController {
         
     }
     
+    /// Adds gesture recgonizer to all three modules
     func addGestureRecognizers() {
         
-        let earthImageryGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(navigateToEyeInTheSky))
+        let earthImageryGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showEyeInTheSky))
         eyeInTheSkyView.isUserInteractionEnabled = true
         eyeInTheSkyView.addGestureRecognizer(earthImageryGestureRecognizer)
         
-        let marsImageryGestureRecogizer = UITapGestureRecognizer(target: self, action: #selector(navigateToRoverPostcardMaker))
+        let marsImageryGestureRecogizer = UITapGestureRecognizer(target: self, action: #selector(showRoverPostcardMaker))
         roverPostcardMakerView.isUserInteractionEnabled = true
         roverPostcardMakerView.addGestureRecognizer(marsImageryGestureRecogizer)
         
-        let marsWeatherGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(navigateToMarsWeather))
+        let marsWeatherGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showMarsWeather))
         marsWeatherView.isUserInteractionEnabled = true
         marsWeatherView.addGestureRecognizer(marsWeatherGestureRecognizer)
     }
     
-    @objc func navigateToEyeInTheSky() {
+    /// Shows the the Eye in the Sky module using a modal transition Style
+    @objc func showEyeInTheSky() {
         
         let earthViewController = storyboard?.instantiateViewController(withIdentifier: String(describing: EarthViewController.self)) as! EarthViewController
         
@@ -92,7 +110,8 @@ class MainViewController: UIViewController {
         present(earthViewController, animated: true, completion: nil)
     }
     
-    @objc func navigateToRoverPostcardMaker() {
+    /// Shows the the Rover Postcard module using a modal transition Style
+    @objc func showRoverPostcardMaker() {
         
         let marsViewController = storyboard?.instantiateViewController(withIdentifier: String(describing: MarsViewController.self)) as! MarsViewController
         
@@ -119,7 +138,8 @@ class MainViewController: UIViewController {
         present(marsViewController, animated: true, completion: nil)
     }
     
-    @objc func navigateToMarsWeather() {
+    /// Shows the the Mars Weather module using a modal transition Style
+    @objc func showMarsWeather() {
         let marsWeatherController = storyboard?.instantiateViewController(withIdentifier: String(describing: MarsWeatherController.self)) as! MarsWeatherController
         
         client.getMarsWeather { data, error in

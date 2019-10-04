@@ -7,19 +7,15 @@
 //
 
 import MapKit
-//
-//protocol Actionable: class {
-//    func action(place: MKPlacemark, annotation: MKAnnotationView) -> (() -> Void)
-//}
 
+/// The custom annotation view to display a custom view for a location by a user
 class SelectedLocationAnnotationView: MKAnnotationView {
     
-    // Constants
+    // MARK: - Properties
     private let pinImage = UIImage(named: "nasa")
     private let animationDuration = 0.3
-    
-    weak var customCalloutView: LocationAnnotationView?
     var actionDelegate: EarthViewController?
+    weak var customCalloutView: LocationAnnotationView?
     
     override var annotation: MKAnnotation? {
         willSet {
@@ -27,6 +23,16 @@ class SelectedLocationAnnotationView: MKAnnotationView {
         }
     }
     
+    /**
+     Initializes a MKAnnotationView
+     
+     - Parameters:
+        - annotation: The annotation used to display the annotation view for
+        - reuseIdentifier: The resuseidentifier for the annotation view used to load view from queue
+        - actionDelegate: The delegate controller used to asign the action to
+     
+     - Returns: A SelectedLocationAnnotationView object
+     */
     init(annotation: MKAnnotation?, reuseIdentifier: String?, actionDelegate: EarthViewController) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         self.canShowCallout = false
@@ -40,6 +46,8 @@ class SelectedLocationAnnotationView: MKAnnotationView {
         self.image = pinImage
     }
     
+    /// Sets the selection state of the annotation view.
+    /// Apple documentation:
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
@@ -90,11 +98,15 @@ class SelectedLocationAnnotationView: MKAnnotationView {
         
     }
     
+    /// Called when the view is removed from the reuse queue.
+    /// Apple documentation: https://developer.apple.com/documentation/mapkit/mkannotationview/1451907-prepareforreuse
     override func prepareForReuse() {
         super.prepareForReuse()
         self.customCalloutView?.removeFromSuperview()
     }
     
+    /// Returns the farthest descendant of the receiver in the view hierarchy (including itself) that contains a specified point.
+    /// Apple documentation: https://developer.apple.com/documentation/uikit/uiview/1622469-hittest
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         if let parentHitView = super.hitTest(point, with: event) {
             return parentHitView
@@ -110,18 +122,19 @@ class SelectedLocationAnnotationView: MKAnnotationView {
     
     // MARK: - Helper
     
+    /**
+     Configures and loads the LocationAnnotationView from the nib
+     
+     - Returns: A LocationAnnotationView
+     */
     private func loadLocationDetailConfigView() -> LocationAnnotationView? {
         guard let views = Bundle.main.loadNibNamed(String(describing: LocationAnnotationView.self), owner: self, options: nil), let locationAnnotationView = views.first as? LocationAnnotationView else { return nil }
             
         if let locationAnnotation = annotation as? SelectedLocationAnnotation {
-            
             let place = locationAnnotation.place
-            
             locationAnnotationView.imageAction = actionDelegate?.action(place: place, annotation: self)
-            
             locationAnnotationView.configureFor(place: place)
             locationAnnotationView.place = place
-            
         }
         
         return locationAnnotationView

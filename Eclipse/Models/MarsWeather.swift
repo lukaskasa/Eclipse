@@ -8,11 +8,14 @@
 
 import Foundation
 
+/// Decodable Object representing each Mars Weather Entry from the _Insight_ NASA API
 class MarsWeatherData: Decodable {
     
+    /// Properties
     var sols: [MarsSol] = []
     var solKeys: [String]
     
+    /// Coding Keys
     private struct WeatherDataKeys: CodingKey {
         let stringValue: String
 
@@ -26,6 +29,7 @@ class MarsWeatherData: Decodable {
         static let solKeys = WeatherDataKeys(stringValue: "sol_keys")!
     }
     
+    /// Required Initializer to decode the json
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: WeatherDataKeys.self)
         self.solKeys = try container.decode([String].self, forKey: .solKeys)
@@ -42,11 +46,15 @@ class MarsWeatherData: Decodable {
     
 }
 
+/// Decodable Object representing each sol in a Mars Weather Data from the _Insight_ NASA API
 class MarsSol: Decodable {
+    
+    /// Properties
     var name: String = ""
     var temperature: MarsTemperature
     let earthDate: String
     
+    /// Coding Keys
     private struct TempCodingKeys: CodingKey {
         let stringValue: String
         init?(stringValue: String) {
@@ -60,6 +68,7 @@ class MarsSol: Decodable {
         static let earthDate = TempCodingKeys(stringValue: "First_UTC")!
     }
     
+    // Required Initializer
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: TempCodingKeys.self)
         self.earthDate = try container.decode(String.self, forKey: .earthDate)
@@ -68,16 +77,18 @@ class MarsSol: Decodable {
     
 }
 
+/// Decodable Object representing the temperature of a Mars Weather Dataset
 class MarsTemperature: Decodable {
     
+    /// Properties
     var averageTemperature: Double
     var minTemperature: Double
     var maxTemperature: Double
-    
     var averageTemperatureFahrenheit: Double
     var minTemperatureFahrenheit: Double
     var maxTemperatureFahrenheit: Double
     
+    // Convert Fahrenheit to Celsius
     var averageTemperatureCelsius: Double {
         let temperature = ((averageTemperature - 32) * (5/9)) * 1000
         return Double(round(temperature) / 1000)
@@ -93,21 +104,14 @@ class MarsTemperature: Decodable {
         return Double(round(temperature) / 1000)
     }
     
+    /// Coding Keys
     private enum CodingKeys: String, CodingKey {
         case averageTemperature = "av"
         case minTemperature = "mn"
         case maxTemperature = "mx"
     }
     
-    init(averageTemperature: Double, minTemperature: Double, maxTemperature: Double, averageTemperatureFahrenheit: Double, minTemperatureFahrenheit: Double, maxTemperatureFahrenheit: Double) {
-        self.averageTemperature = averageTemperature
-        self.minTemperature = minTemperature
-        self.maxTemperature = maxTemperature
-        self.averageTemperatureFahrenheit = averageTemperatureFahrenheit
-        self.minTemperatureFahrenheit = minTemperatureFahrenheit
-        self.maxTemperatureFahrenheit = maxTemperatureFahrenheit
-    }
-    
+    /// Required Initializer using to decode each property
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         averageTemperature = try container.decode(Double.self, forKey: .averageTemperature)

@@ -9,19 +9,15 @@
 import UIKit
 import MapKit
 
-protocol MarginAdjustable: class {
-    func changeMargin() -> Void
-}
-
+/// UIViewController for the Eye in the Sky module
 class EarthViewController: UIViewController {
     
     // MARK: - Outlets
-    
     @IBOutlet weak var mapView: MKMapView!
     
     // MARK: - Properties
-    
-    // Constants
+    private let modalViewTag = 10
+    private let darkenViewTag = 20
     private let darkGrey = UIColor(red: 26/255, green: 26/255, blue: 26/255, alpha: 1.0)
     private let searchPlaceholder = "Search for a location"
     
@@ -59,6 +55,7 @@ class EarthViewController: UIViewController {
     
     // MARK: - Helper
     
+    /// Sets all the delegates
     func setDelegates() {
         locationSearchController = (storyboard!.instantiateViewController(withIdentifier: String(describing: LocationSearchController.self)) as! LocationSearchController)
         searchController.searchBar.delegate = locationSearchController
@@ -68,12 +65,14 @@ class EarthViewController: UIViewController {
         locationSearchController?.handleMapSearchDelegate = self
     }
     
+    /// Sets up the navigation bar with a search bar
     func setupNavigationBar() {
         navigationBar = NavigationBar(for: self.view, title: "Eye in the sky", leftButton: .back, rightButton: .search, leftButtonAction: #selector(mainMenu), rightButtonAction: #selector(search))
         navigationBar?.load()
         setupSearchBar()
     }
     
+    /// Setup method for the UISearchBar
     func setupSearchBar() {
         locationSearchController?.mapView = mapView
         definesPresentationContext = true
@@ -118,6 +117,7 @@ class EarthViewController: UIViewController {
         searchView.addSubview(searchBar)
     }
 
+    /// Configure the map
     func setupMap() {
         getLocation()
         mapView.translatesAutoresizingMaskIntoConstraints = false
@@ -126,6 +126,7 @@ class EarthViewController: UIViewController {
         mapView.isScrollEnabled = true
     }
     
+    /// Starts the NASA animation once an API call is trigged
     func startAnimation() {
         let dimView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
         loadAnimation = LoadAnimation(for: self.view)
@@ -143,6 +144,7 @@ class EarthViewController: UIViewController {
         loadAnimation?.start()
     }
     
+    /// @objc method that shows the searchfield on on screen
     @objc func search() {
         navigationBar?.navItem.leftBarButtonItem = NavBarButton.close.button(action: #selector(closeSearch))
         searchView.isHidden = false
@@ -150,14 +152,17 @@ class EarthViewController: UIViewController {
         searchBar.becomeFirstResponder()
     }
     
+    /// Hides the searchfield
     @objc func closeSearch() {
         dismissSearch(true)
     }
     
+    /// Navigate back to the search field
     @objc func mainMenu() {
         dismiss(animated: true, completion: nil)
     }
     
+    /// Returns an action which fires an API call and sets the satelite image
     func action(place: MKPlacemark, annotation: MKAnnotationView) -> (() -> Void) {
         annotationView = annotation
         
@@ -176,10 +181,12 @@ class EarthViewController: UIViewController {
                     
                     let view = SateliteImageView()
                     
+                    // Set cancel action of the modal
                     view.cancelAction = {
                         strongSelf.close()
                     }
                     
+                    // Set save action of the modal
                     view.saveAction = {
                         
                         if let image = view.imageView.image {
@@ -198,11 +205,11 @@ class EarthViewController: UIViewController {
                                 
                                 guard let imageData = imageData, let image = UIImage(data: imageData), let superview = strongSelf.view else { return }
                                 view.imageView.image = image
-                                view.tag = 10
+                                view.tag = strongSelf.modalViewTag
                                 
                                 superview.addSubview(view)
                                 
-                                if let view = superview.viewWithTag(20) {
+                                if let view = superview.viewWithTag(strongSelf.darkenViewTag) {
                                     self?.addClosingGestureTo(view: view)
                                 }
                                 
@@ -227,39 +234,43 @@ class EarthViewController: UIViewController {
         return action
     }
     
+    /// Adds a gesture recognizer which is used to close the modal
     func addClosingGestureTo(view: UIView) {
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(closeModal))
         view.addGestureRecognizer(gestureRecognizer)
     }
     
+    /// Closes the modal
     @objc func closeModal() {
         close()
     }
     
+    /// Closes the modal by removed it from the superview
     func close() {
-        let modalView = view.viewWithTag(10)
-        let darkenView = view.viewWithTag(20)
+        let modalView = view.viewWithTag(modalViewTag)
+        let darkenView = view.viewWithTag(darkenViewTag)
         modalView?.removeFromSuperview()
         darkenView?.removeFromSuperview()
         annotationView?.setSelected(true, animated: true)
     }
     
+    /// @objc method to show an alert if there is an error while saving the photo
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-        
         if let error = error {
             showAlert(with: "Error", and: error.localizedDescription)
         } else {
             showAlert(with: "Saved", and: "The Satelite Image was saved!")
         }
-        
     }
     
     
 }
 
+/// Implementation of LocationManagerDelegate
 extension EarthViewController: LocationManagerDelegate {
     
     func obtainedCoordinates(_ coordinate: Coordinate) {
+        /// Set current location
     }
     
     func failedWithError(_ error: LocationError) {
@@ -268,6 +279,7 @@ extension EarthViewController: LocationManagerDelegate {
     
     // MARK: - Helper
     
+    ///
     func locationServicesAvailable() -> Bool {
         if !locationManager.isAuthorized {
             do {
@@ -310,35 +322,38 @@ extension EarthViewController: Dismissable {
     
 }
 
+/// HandleMapSearch Implementation to zoom into the map
 extension EarthViewController: HandleMapSearch {
     
     func dropInZoom(placemark: MKPlacemark) {
-        
         dismissSearch(false)
         
         let annotation = SelectedLocationAnnotation(place: placemark)
         
         mapView.removeAnnotations(mapView.annotations)
         mapView.addAnnotation(annotation)
-
         mapView.selectAnnotation(annotation, animated: true)
         
         let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
-        
         let region = MKCoordinateRegion(center: placemark.coordinate, span: span)
-        
         mapView.setRegion(region, animated: true)
     }
     
 }
 
+/// Optional methods that you use to receive map-related update messages.
+/// Apple documentation: https://developer.apple.com/documentation/mapkit/mkmapviewdelegate
 extension EarthViewController: MKMapViewDelegate {
     
+    /// Tells the delegate that the location of the user was updated.
+    /// Apple documentation: https://developer.apple.com/documentation/mapkit/mkmapviewdelegate/1452086-mapview
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         let visibleLocation = MKCoordinateRegion(center: userLocation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
         mapView.setRegion(visibleLocation, animated: true)
     }
     
+    /// Returns the view associated with the specified annotation object.
+    /// Apple documentation: https://developer.apple.com/documentation/mapkit/mkmapviewdelegate/1452045-mapviews
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         if annotation is MKUserLocation { return nil }

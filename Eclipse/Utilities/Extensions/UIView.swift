@@ -8,14 +8,15 @@
 
 import UIKit
 
-
-
+/// Credit: https://github.com/DigitalLeaves/YourPersonalWishlist/blob/master/CustomPinsMap/UIView%2BBezierPaths.swift
 extension UIView {
     
+    /// Convert Degrees to Radians
     func degreesToRadians (_ value:CGFloat) -> CGFloat {
         return value * CGFloat(Double.pi) / 180.0
     }
     
+    /// Convert Radians to Degrees
     func radiansToDegrees (_ value:CGFloat) -> CGFloat {
         return value * 180.0 / CGFloat(Double.pi)
     }
@@ -73,6 +74,7 @@ extension UIView {
         return path
     }
     
+    /// Draws an arrow for the given UIView
     func applyArrowDialogAppearanceWithOrientation(arrowOrientation: UIImage.Orientation, color: UIColor) {
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = dialogBezierPathWithFrame(self.frame, arrowOrientation: arrowOrientation).cgPath

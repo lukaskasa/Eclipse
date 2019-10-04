@@ -8,11 +8,18 @@
 
 import MapKit
 
+/// The custom annotation used to display for every location search by the user
 class SelectedLocationAnnotation: NSObject, MKAnnotation {
     
+    /// Properties
     var place: MKPlacemark
     var coordinate: CLLocationCoordinate2D { return place.coordinate }
     
+    /**
+     Initializes a SelectedLocationAnnotation
+     
+     - Returns: A SelectedLocationAnnotation
+     */
     init(place: MKPlacemark) {
         self.place = place
         super.init()

@@ -18,7 +18,7 @@ class ImagePageViewController: UIPageViewController {
     
     var navigationBar: UINavigationBar!
     var navItem = UINavigationItem(title: "Mars Rover Image")
-    var images: [MarsImage] = []
+    var images: [MarsRoverImage] = []
     var imageIndexPath: IndexPath!
     var indexOfCurrentImage: Int!
     
@@ -41,7 +41,7 @@ class ImagePageViewController: UIPageViewController {
         return true
     }
     
-    func imageViewerController(with image: MarsImage) -> ImageViewerController? {
+    func imageViewerController(with image: MarsRoverImage) -> ImageViewerController? {
         guard let storyboard = storyboard, let imageViewerController = storyboard.instantiateViewController(withIdentifier: String(describing: ImageViewerController.self)) as? ImageViewerController else { return nil }
         
         imageViewerController.marsImage = image

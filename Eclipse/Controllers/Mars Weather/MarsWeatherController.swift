@@ -12,21 +12,17 @@ import SceneKit
 class MarsWeatherController: UIViewController {
     
     // MARK: - Outlets
-    @IBOutlet weak var sceneView: SCNView! {
-        
-        didSet {
-            marsSceneView = MarsSceneView(sceneView: sceneView)
-        }
-        
-    }
-    
+    @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: - Properties
     
     let client = NASAClient()
     var navigationBar: NavigationBar?
-    var marsSceneView: MarsSceneView!
+    
+    lazy var marsSceneView: MarsSceneView = {
+        return MarsSceneView()
+    }()
     
     var solWeather: [MarsSol]? {
         didSet {
@@ -59,6 +55,7 @@ class MarsWeatherController: UIViewController {
         // Setup
         setupNavigationBar()
         setupCollectionView()
+        stackView.addArrangedSubview(marsSceneView)
     }
     
     // MARK: - Helper

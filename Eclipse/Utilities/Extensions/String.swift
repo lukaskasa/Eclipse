@@ -10,6 +10,7 @@ import Foundation
 
 extension String {
     
+    /// Method used to return a readable date consisting of  day and month
     func toReadableDate() -> String? {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"

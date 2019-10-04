@@ -15,7 +15,7 @@ class ImageViewerController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     
     // MARK: - Properties
-    var marsImage: MarsImage!
+    var marsImage: MarsRoverImage!
     var indexPath: IndexPath!
     
     // MARK: - View Life Cycle
@@ -53,7 +53,7 @@ class ImageViewerController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    func downloadMarsImage(_ marsImage: MarsImage) {
+    func downloadMarsImage(_ marsImage: MarsRoverImage) {
         do {
             let data = try Data(contentsOf: URL(string: marsImage.imgSrc)!)
             marsImage.image = UIImage(data: data)

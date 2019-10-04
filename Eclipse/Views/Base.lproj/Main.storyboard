@@ -294,12 +294,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="nsR-pe-2a5">
                                 <rect key="frame" x="0.0" y="55" width="375" height="612"/>
                                 <subviews>
-                                    <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" preferredRenderingAPI="1" translatesAutoresizingMaskIntoConstraints="NO" id="hc6-nQ-yue">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="306"/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </sceneKitView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8wd-Ux-vNf">
-                                        <rect key="frame" x="0.0" y="306" width="375" height="306"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="612"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0xd-Rr-f2P">
                                             <size key="itemSize" width="200" height="200"/>
@@ -309,7 +305,7 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" reuseIdentifier="MarsWeatherCell" id="BCp-9n-Zl5" customClass="MarsWeatherCell" customModule="Eclipse" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="53" width="200" height="200"/>
+                                                <rect key="frame" x="16" y="0.0" width="200" height="200"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
@@ -431,7 +427,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="8wd-Ux-vNf" id="zv4-yO-kSn"/>
-                        <outlet property="sceneView" destination="hc6-nQ-yue" id="NKN-yR-jie"/>
+                        <outlet property="stackView" destination="nsR-pe-2a5" id="WsB-Kd-ooB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D6w-G8-fXe" userLabel="First Responder" sceneMemberID="firstResponder"/>

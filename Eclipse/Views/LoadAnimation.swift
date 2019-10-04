@@ -8,15 +8,26 @@
 
 import UIKit
 
+/// Load Animation used to indicate network activity currently in progress
 class LoadAnimation: UIView {
     
+    /// Properties
     private var animator: UIViewPropertyAnimator!
     private let nasaLogo = UIImage(named: "nasa")
     
+    /**
+     Initialzes a load animation with a custom CGRect
+     
+     - Parameters:
+        - frame: The CGRect used to determine size and position of the view
+     
+     Returns:
+     */
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
+    /// Convenience initializer with the superview used to display the animation
     convenience init(for view: UIView) {
         self.init(frame: CGRect(x: 0, y: 0, width: 50.0, height: 50.0))
         setupViews()
@@ -27,12 +38,14 @@ class LoadAnimation: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// Setup the subviews
     private func setupViews() {
         self.backgroundColor = .clear
         self.layer.cornerRadius = self.frame.width / 2.0
         setupImageView()
     }
     
+    /// Setup imageview
     private func setupImageView() {
         let imageView = UIImageView(image: nasaLogo)
         self.addSubview(imageView)
@@ -42,8 +55,13 @@ class LoadAnimation: UIView {
         imageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0.0).isActive = true
      }
     
+    /**
+     Initializes and starts a repeating animation using UIViewPropertyAnimator
+     - Parameters:
+        - reversed: Indicating in what direction the animation should flow
+     - Returns: Void
+     */
     private func initAnimation(_ reversed: Bool = false) {
-        
         animator = UIViewPropertyAnimator(
             duration: 1.5, timingParameters: UICubicTimingParameters())
         
@@ -58,11 +76,13 @@ class LoadAnimation: UIView {
         animator.startAnimation()
     }
     
+    /// Starts the animation
     func start() {
         self.isHidden = false
         animator.startAnimation()
     }
     
+    /// Stops and resets the animation
     func stop() {
         animator = nil
         self.isHidden = true

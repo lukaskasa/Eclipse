@@ -8,8 +8,10 @@
 
 import UIKit
 
+/// UITableViewCell - Used to find the current user location when this particular cell is tapped on the tableview
 class CurrentLocationCell: UITableViewCell {
     
+    /// Cell reuseidentifier
     static let reuseIdentifier = "CurrentLocationCell"
     
     override func awakeFromNib() {

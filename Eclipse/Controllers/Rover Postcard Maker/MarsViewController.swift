@@ -12,7 +12,6 @@ class MarsViewController: UICollectionViewController {
     
     // MARK: - Properties
     let client = NASAClient()
-    var delegate: MarsImageryDelegate?
     var navigationBar: NavigationBar?
     var navItem = UINavigationItem(title: "Rover Postcard Maker")
     
@@ -24,9 +23,8 @@ class MarsViewController: UICollectionViewController {
     
     var loadAnimation: LoadAnimation!
     
-    var images: [MarsImage]? {
+    var images: [MarsRoverImage]? {
         didSet {
-            delegate = MarsImageryDelegate()
             datasource.update(with: images!)
             collectionView.reloadData()
             navigationBar?.rightButton = .controls
@@ -73,7 +71,7 @@ class MarsViewController: UICollectionViewController {
     
     
     func setupCollectionView() {
-        self.collectionView.delegate = delegate
+        self.collectionView.delegate = self
         self.collectionView.dataSource = datasource
     }
     

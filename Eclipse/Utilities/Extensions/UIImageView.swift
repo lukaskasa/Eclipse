@@ -10,7 +10,8 @@ import UIKit
 
 extension UIImageView {
     
-    func realImageRect() -> CGRect {
+    /// Get the real image rect to perform the correct crop on the image
+    func getRealImageRect() -> CGRect {
         
         let imageViewSize = self.frame.size
         let imgSize = self.image?.size

@@ -8,20 +8,17 @@
 
 import UIKit
 
-// Constants
-private let viewWidth: CGFloat = 256.0
-private let viewHeight: CGFloat = 298.0
-private let primaryFont: UIFont = UIFont(name: "Futura", size: 17.0)!
-private let brandColor = UIColor(red: 0, green: 102/255, blue: 179/255, alpha: 1.0)
-private let secondaryColor = UIColor(red: 238/255, green: 22/255, blue: 31/255, alpha: 1.0)
-
+/// Modal UIView to display the satelite image in
 class SateliteImageView: UIView {
     
     // MARK: - Properties
+    private let primaryFont: UIFont = UIFont(name: "Futura", size: 17.0)!
+    private let brandColor = UIColor(red: 0, green: 102/255, blue: 179/255, alpha: 1.0)
+    private let secondaryColor = UIColor(red: 238/255, green: 22/255, blue: 31/255, alpha: 1.0)
+    
     var saveAction: (() -> Void)?
     var cancelAction: (() -> Void)?
 
-    
     lazy var imageView: UIImageView = {
         let view = UIImageView(frame: CGRect(x: 0, y: 0, width: 100.0, height: 100.0))
         return view
@@ -54,6 +51,14 @@ class SateliteImageView: UIView {
         return stackView
     }()
     
+    /**
+     Initializes a Earth Satelite image view
+     
+     - Parameters:
+        - frame: The CGRect used to determine size and position of the view
+     
+     - Returns: A SateliteImageView
+     */
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .black
@@ -62,27 +67,30 @@ class SateliteImageView: UIView {
         addActions()
     }
     
-    convenience init() {
-        self.init(frame: CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight))
+    // Convenience initializer used with default size values
+    convenience init(width: CGFloat = 256.0, height: CGFloat = 298.0) {
+        self.init(frame: CGRect(x: 0, y: 0, width: width, height: height))
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// Setup the subviews
     func setupViews() {
         self.addSubview(imageView)
         self.addSubview(buttonStackView)
     }
     
+    /// Setup the constraints
     func setupConstraints() {
         // Main View
         self.translatesAutoresizingMaskIntoConstraints = false
-        
         setupImageViewConstraints()
         setStackViewConstraints()
     }
     
+    /// Setup image View constraints
     fileprivate func setupImageViewConstraints() {
         // Image View Constraints
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -93,6 +101,7 @@ class SateliteImageView: UIView {
         imageView.widthAnchor.constraint(equalToConstant: 256.0).isActive = true
     }
     
+    /// Setup Stack View constraints
     fileprivate func setStackViewConstraints() {
         // Button Constraints
         buttonStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -103,15 +112,18 @@ class SateliteImageView: UIView {
         buttonStackView.heightAnchor.constraint(equalToConstant: 42.0).isActive = true
     }
     
+    /// Asign actions to the buttons accordingly
     func addActions() {
         cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
         saveButton.addTarget(self, action: #selector(save), for: .touchUpInside)
     }
     
+    /// Cancel action
     @objc func cancel() {
         cancelAction?()
     }
     
+    /// Save action
     @objc func save() {
         saveAction?()
     }

@@ -8,18 +8,24 @@
 
 import Foundation
 
+/// Enum representing the different NASA API Endpoints -> https://api.nasa.gov
 enum NASA {
+    /// "Earth: Unlock the significant public investment in earth observation Data"
     case earthImagery(latitude: Double, longitude: Double)
+    /// ''Mars Rover Photos: Image data gathered by NASA's Curiosity, Opportunity and Spirit Rovers on Mars "
     case marsRoverImagery(sol: Int, camera: String?)
+    /// "Insight: Mars Weather Service API"
     case marsWeather
 }
 
 extension NASA: Endpoint {
     
+    /// Base URL
     var base: String {
         return "https://api.nasa.gov"
     }
     
+    /// Endpoint directories
     var path: String {
         
         switch self {
@@ -33,6 +39,7 @@ extension NASA: Endpoint {
         
     }
     
+    /// Endpoint parameters
     var queryItems: [URLQueryItem] {
         
         switch self {
@@ -40,15 +47,11 @@ extension NASA: Endpoint {
             return [
                 URLQueryItem(name: "lon", value: longitude.description),
                 URLQueryItem(name: "lat", value: latitude.description)
-                //URLQueryItem(name: "dim", value: dimension.description),
-                //URLQueryItem(name: "date", value: date),
-                //URLQueryItem(name: "cloud_score", value: cloudScore.description)
             ]
         case .marsRoverImagery(sol: let sol, camera: let camera):
             return [
                 URLQueryItem(name: "sol", value: sol.description),
                 URLQueryItem(name: "camera", value: camera)
-                //URLQueryItem(name: "page", value: page)
             ]
         case .marsWeather:
             return [
@@ -58,6 +61,5 @@ extension NASA: Endpoint {
         }
         
     }
-    
     
 }

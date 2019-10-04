@@ -26,7 +26,7 @@ class ImageEditViewController: UIViewController {
     private let postcardFont = UIFont(name: "Futura-Medium", size: 20.0)!
     
     var navigationBar: NavigationBar?
-    var marsImage: MarsImage!
+    var marsImage: MarsRoverImage!
     var postCardView: UIView!
     var colorPaletteView: UIStackView!
     var fillLayer = CAShapeLayer()
@@ -153,7 +153,7 @@ class ImageEditViewController: UIViewController {
         
         let imageViewScale = max(currentImage.size.width / editImageView.frame.width, currentImage.size.height / editImageView.frame.height)
         
-        let cropRect = CGRect(x: postCardView.frame.origin.x - editImageView.realImageRect().origin.x, y: postCardView.frame.origin.y - editImageView.realImageRect().origin.y, width: postCardView.frame.width, height: postCardView.frame.height)
+        let cropRect = CGRect(x: postCardView.frame.origin.x - editImageView.getRealImageRect().origin.x, y: postCardView.frame.origin.y - editImageView.getRealImageRect().origin.y, width: postCardView.frame.width, height: postCardView.frame.height)
         
         let cropArea = CGRect(x: cropRect.origin.x * imageViewScale, y: cropRect.origin.y * imageViewScale, width: cropRect.size.width * imageViewScale, height: cropRect.size.height * imageViewScale)
         

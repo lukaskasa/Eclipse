@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Enum APIError to represent the different failure cases during API Calls
 enum APIError: Error {
     case requestFailed
     case responseUnsuccessful

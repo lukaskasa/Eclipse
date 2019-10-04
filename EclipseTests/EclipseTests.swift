@@ -254,6 +254,37 @@ class EclipseTests: XCTestCase {
         XCTAssertNoThrow(try JSONDecoder().decode(EarthImage.self, from: earthImageJSON), "JSON could not be parsed!")
     }
     
+    func testEarthImageJSONParsingFromAPI() {
+        
+        let expectation = XCTestExpectation(description: "Earth Imagery API")
+        let latitude = 45.0
+        let longitude = 45.0
+        
+        let endpoint = NASA.earthImagery(latitude: latitude, longitude: longitude)
+        
+        client.performRequest(with: endpoint.request) { imageData,error in
+            
+            if let earthImageData = imageData {
+                do {
+                    XCTAssertNoThrow(try JSONDecoder().decode(EarthImage.self, from: earthImageData), "JSON could not be parsed!")
+                    let _ = try JSONDecoder().decode(EarthImage.self, from: earthImageData)
+                    expectation.fulfill()
+                } catch let error {
+                    XCTAssert(false, "Parsing failed: \(error.localizedDescription)")
+                    expectation.fulfill()
+                }
+            }
+            
+            if error != nil {
+                XCTAssert(false, "Error: \(error!.localizedDescription)")
+                expectation.fulfill()
+            }
+  
+        }
+        
+        wait(for: [expectation], timeout: 10.0)
+    }
+    
     func testEarthImageAPI() {
 
         let expectation = XCTestExpectation(description: "Earth Imagery API")
@@ -283,6 +314,36 @@ class EclipseTests: XCTestCase {
         XCTAssertNoThrow(try JSONDecoder().decode(MarsImages.self, from: marsRoverJSON), "JSON could not be parsed!")
     }
     
+    
+    func testMarsRoverImageryJSONParsingFromAPI() {
+        
+        let expectation = XCTestExpectation(description: "Mars Rover Imagery API")
+        let endpoint = NASA.marsRoverImagery(sol: 1000, camera: "FHAZ")
+      
+        client.performRequest(with: endpoint.request) { imageData,error in
+            
+            if let marsRoverImageData = imageData {
+                
+                do {
+                    XCTAssertNoThrow(try JSONDecoder().decode(MarsImages.self, from: marsRoverImageData), "JSON could not be parsed!")
+                    let _ = try JSONDecoder().decode(MarsImages.self, from: marsRoverImageData)
+                    expectation.fulfill()
+                } catch let error {
+                    XCTAssert(false, "Parsing failed: \(error.localizedDescription)")
+                    expectation.fulfill()
+                }
+          }
+          
+          if error != nil {
+              XCTAssert(false, "Error: \(error!.localizedDescription)")
+              expectation.fulfill()
+          }
+
+      }
+        
+      wait(for: [expectation], timeout: 10.0)
+    }
+    
     func testMarsRoverImageryAPI() {
         
         let expectation = XCTestExpectation(description: "Mars Rover Imagery API")
@@ -308,6 +369,35 @@ class EclipseTests: XCTestCase {
     
     func testMarsWeatherJSONParsing() {
         XCTAssertNoThrow(try JSONDecoder().decode(MarsWeatherData.self, from: marsWeatherJSON), "JSON could not be parsed")
+    }
+    
+    func testMarsWeatherJSONParsingFromAPI() {
+        
+        let expectation = XCTestExpectation(description: "Mars Rover Imagery API")
+        let endpoint = NASA.marsWeather
+      
+        client.performRequest(with: endpoint.request) { weatherData,error in
+            
+            if let marsWeatherData = weatherData {
+                
+                do {
+                    XCTAssertNoThrow(try JSONDecoder().decode(MarsWeatherData.self, from: marsWeatherData), "JSON could not be parsed!")
+                    let _ = try JSONDecoder().decode(MarsWeatherData.self, from: marsWeatherData)
+                    expectation.fulfill()
+                } catch let error {
+                    XCTAssert(false, "Parsing failed: \(error.localizedDescription)")
+                    expectation.fulfill()
+                }
+          }
+          
+          if error != nil {
+              XCTAssert(false, "Error: \(error!.localizedDescription)")
+              expectation.fulfill()
+          }
+
+      }
+        
+      wait(for: [expectation], timeout: 10.0)
     }
     
     func testMarsWeatherAverageTemperatureConversion() {

@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// UICollectionViewCell -  used to display the available weather information for mars
 class MarsWeatherCell: UICollectionViewCell {
     
     // MARK: - Outlets
@@ -16,18 +17,17 @@ class MarsWeatherCell: UICollectionViewCell {
     @IBOutlet weak var averageTempLabel: UILabel!
     @IBOutlet weak var minTempLabel: UILabel!
     @IBOutlet weak var maxTempLabel: UILabel!
-    
+
+    // MARK: - Properties
+    static let reuseIdentifier = "MarsWeatherCell"
     var fahrenheit = Bool()
     var sol: MarsSol!
     
-    // MARK: - Properties
-    static let reuseIdentifier = "MarsWeatherCell"
-    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Setup
     }
     
+    /// Configure the cell all the data available from the mars sol
     func configure() {
         let unit = fahrenheit ? "℉" : "℃" 
         solLabel.text = "Sol \(sol.name)"

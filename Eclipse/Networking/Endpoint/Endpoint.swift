@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Protocol consisting of all the components for an endpoint
+/// Protocol consisting of all the components for each endpoint
 protocol Endpoint {
     var base: String { get }
     var path: String { get }
@@ -31,6 +31,7 @@ extension Endpoint {
         return components
     }
     
+    /// URL Request representation
     var request: URLRequest {
         let url = urlComponents.url!
         return URLRequest(url: url)

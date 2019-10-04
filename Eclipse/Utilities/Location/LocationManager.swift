@@ -9,15 +9,35 @@
 import UIKit
 import CoreLocation
 
+/// Enum representing a LocationError
 enum LocationError: Error {
-    case unknownError, disallowedByUser, unableToFindLocation, locationServicesUnavailable
+    case unknownError
+    case disallowedByUser
+    case unableToFindLocation
+    case locationServicesUnavailable
+    
+    var localizedDescription: String {
+        switch self {
+        case .unknownError:
+            return "Error: Unknown error occured."
+        case .disallowedByUser:
+            return "Location Services where dissallowded. Change it in the settings."
+        case .unableToFindLocation:
+            return "It was not possible to retrieve the location."
+        case .locationServicesUnavailable:
+            return "Location servies are unavailable."
+        }
+        
+    }
 }
 
+/// Delegate Protocol implemented by a Controller handling the retrieved Coordinates
 protocol LocationManagerDelegate: class {
     func obtainedCoordinates(_ coordinate: Coordinate)
     func failedWithError(_ error: LocationError)
 }
 
+/// LocationManager to handler permission request and delegate methods used to retrieve users current location
 class LocationManager: NSObject, CLLocationManagerDelegate {
     
    // MARK: - Properties

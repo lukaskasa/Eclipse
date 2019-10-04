@@ -8,15 +8,19 @@
 
 import Foundation
 
+/// NASAClient with methods accessing the API Endpoints, retrieving Data and parsing it
 class NASAClient: APIClient {
     
+    /// Properties
     let jsonDecoder = JSONDecoder()
     var session: URLSession
     
+    /// Initializer
     init(configuration: URLSessionConfiguration) {
         self.session = URLSession(configuration: configuration)
     }
     
+    /// Convenience Initializer with the default config
     convenience init() {
         self.init(configuration: .default)
     }
@@ -24,6 +28,12 @@ class NASAClient: APIClient {
     /// Typealias for Earth Imagery
     typealias EarthImageryCompletionHandler = (EarthImage?, APIError?) -> Void
     
+    /**
+     Retrieves the EarthImageData including the image url
+     - Parameters:
+        - completion: Completion handler espaces closure with the parsed Earth Data or returns an API Error if unsuccessful
+     - Returns: Void
+     */
     func getEarthImageData(latitude: Double, longitude: Double, completionHandler completion: @escaping EarthImageryCompletionHandler) {
         
         // Endpoint
@@ -53,6 +63,14 @@ class NASAClient: APIClient {
     /// Typealias for Earth Image Handler Type
     typealias EarthImageCompletionHandler = (Data?, APIError?) -> Void
     
+    /**
+     Retrieves  an image from the given EarthImage Object
+     
+     - Parameters:
+        - completion: Completion handler escapes closure with the Image data or returns an API Error if unsuccessful
+     
+     - Returns: Void
+     */
     func getImage(earthImageJSON: EarthImage, completionHandler completion: @escaping EarthImageCompletionHandler) {
         
         let url = URL(string: earthImageJSON.url)!
@@ -72,9 +90,17 @@ class NASAClient: APIClient {
     }
     
     
-    /// Typealias for Mars Imagery Rover
+    /// Typealias for Mars  Rover Photos
     typealias MarsImageryCompletionHandler = (MarsImages?, APIError?) -> Void
     
+    /**
+     Retrieves  mars rover imagery data from the Mars Rover Photos API
+     
+     - Parameters:
+        - completion: Completion handler escapes closure with the parsed MarsImages data or returns an API Error if unsuccessful
+     
+     - Returns: Void
+     */
     func getMarsImages(sol: Int = 1000, camera: String? = nil, completionHandler completion: @escaping MarsImageryCompletionHandler) {
         
         let endpoint = NASA.marsRoverImagery(sol: sol, camera: camera)
@@ -107,7 +133,14 @@ class NASAClient: APIClient {
     /// Typealias for Mars Weather
     typealias MarsWeatherCompletionHandler = (MarsWeatherData?, APIError?) -> Void
 
-    
+    /**
+     Retrieves the most recent weather Data from the Mars Weather Service API
+     
+     - Parameters:
+        - completion: Completion handler escapes closure with the parsed MarsWeatherData data or returns an API Error
+     
+     - Returns: Void
+     */
     func getMarsWeather(completionHandler completion: @escaping MarsWeatherCompletionHandler) {
         
         let endpoint = NASA.marsWeather
