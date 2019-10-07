@@ -9,8 +9,7 @@
 import UIKit
 import MessageUI
 
-private let brandColor = UIColor(red: 0, green: 102/255, blue: 179/255, alpha: 1.0)
-
+/// Edit Controller used to edit the selected mars rover image
 class ImageEditViewController: UIViewController {
     
     // MARK: - Outlets
@@ -23,6 +22,7 @@ class ImageEditViewController: UIViewController {
     @IBOutlet weak var imageViewLeadingConstraint: NSLayoutConstraint!
     
     // MARK: - Properties
+    private let brandColor = UIColor(red: 0, green: 102/255, blue: 179/255, alpha: 1.0)
     private let postcardFont = UIFont(name: "Futura-Medium", size: 20.0)!
     
     var navigationBar: NavigationBar?
@@ -40,6 +40,10 @@ class ImageEditViewController: UIViewController {
         return min(widthScale, heightScale)
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
@@ -52,21 +56,25 @@ class ImageEditViewController: UIViewController {
         editImageView.image = marsImage.image
         editImageView.sizeToFit()
         editScrollView.contentSize = editImageView.bounds.size
-        updateZoomScale()
+        setZoomScale()
         updateConstraints(view.bounds.size)
         view.backgroundColor = .black
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
-    func updateZoomScale() {
+    /// Set the Scrollview zoomscale
+    func setZoomScale() {
         editScrollView.minimumZoomScale = 1.0
         editScrollView.zoomScale = 1.0
         editScrollView.maximumZoomScale = 2.0
     }
     
+    /** Update constraints according to the zoom scale
+     
+     - Parameters:
+        - size: The size used to set the constraints accordingly
+     
+     - Returns: Void
+     */
     func updateConstraints(_ size: CGSize) {
         let verticalSize = size.height - editImageView.frame.height
         
@@ -79,11 +87,15 @@ class ImageEditViewController: UIViewController {
         imageViewTrailingConstraint.constant = xOffset
     }
     
+    /**
+     Set up the Navigation bar
+     */
     func setupNavigationBar() {
         navigationBar = NavigationBar(for: self.view, title: "Crop", leftButton: .close, rightButton: .next, leftButtonAction: #selector(closeEdit), rightButtonAction: #selector(cropImage))
         navigationBar?.load()
     }
     
+    /// @objc method to crop the image, set the user selected text and email the image using MessageUI
     @objc func addTextAndSend() {
         // Add Textfield
         
@@ -116,22 +128,7 @@ class ImageEditViewController: UIViewController {
         sendPostCard(finalPostcardImage)
     }
     
-    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-        
-        if let error = error {
-            let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default)
-            alertController.addAction(okAction)
-            present(alertController, animated: true)
-        } else {
-            let alertController = UIAlertController(title: "Saved", message: "The Satelite Image was saved!", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default)
-            alertController.addAction(okAction)
-            present(alertController, animated: true)
-        }
-        
-    }
-    
+    /// @objc method used to reset a crop when user navigates back a step
     @objc func resetCrop() {
         editImageView.image = marsImage.image
         addPostcardMask(gutter: 32.0, topMargin: 44.0)
@@ -141,10 +138,11 @@ class ImageEditViewController: UIViewController {
         navigationBar?.navItem.title = "Crop"
         navigationBar?.navItem.leftBarButtonItem = NavBarButton.close.button(action: #selector(closeEdit))
         navigationBar?.navItem.rightBarButtonItem = NavBarButton.next.button(action: #selector(cropImage))
-        updateZoomScale()
+        setZoomScale()
         updateConstraints(view.bounds.size)
     }
     
+    /// @objc method to crop image
     @objc func cropImage() {
         
         guard let currentImage = editImageView.image else { return }
@@ -178,10 +176,20 @@ class ImageEditViewController: UIViewController {
         addColorPalette()
     }
     
+    /// @objc to dismiss the editing view and return to the image viewer
     @objc func closeEdit() {
         dismiss(animated: true, completion: nil)
     }
     
+    /**
+     Method used to add a mask to indicate which portion of the screen will be used to crop the image
+     
+     - Parameters:
+        - gutter: The gutter used to create the mask
+        - topMargin: The margin to the top used to start the mask
+     
+     - Returns: Void
+     */
     func addPostcardMask(gutter: CGFloat, topMargin: CGFloat) {
         fillLayer.removeFromSuperlayer()
         let screenWidth = UIScreen.main.bounds.width
@@ -203,6 +211,7 @@ class ImageEditViewController: UIViewController {
         view.layer.addSublayer(fillLayer)
     }
     
+    /// Creates a clear rectangle inside the postcard mask
     func addPostcardView() {
         postCardView = UIView()
         postCardView.isUserInteractionEnabled = false
@@ -218,7 +227,8 @@ class ImageEditViewController: UIViewController {
         postCardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16.0).isActive = true
         postCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16.0).isActive = true
     }
-    
+
+    /// Adds a textfield inside the rectangle to enter the text on the postcard
     func addPostCardTextfield() {
         postCardTextField = UITextField()
         postCardTextField.font = postcardFont
@@ -233,6 +243,7 @@ class ImageEditViewController: UIViewController {
         addDoneButtonOnKeyboard()
     }
     
+    /// Adds a color pallete used to select a text color
     func addColorPalette() {
         
         let colors: [UIColor] = [.white, .black, .red, .blue, .green, .yellow, .cyan, .magenta, .orange]
@@ -267,28 +278,33 @@ class ImageEditViewController: UIViewController {
         
     }
     
-    
+    /// @objc method used to change text color of the text on the postcard
     @objc func changeTextColor(sender: UIButton) {
         postcardTextColor = sender.backgroundColor!
         postCardTextField.textColor = sender.backgroundColor
     }
     
+    /**
+     Sends the postcard when an E-Mail account is provided
+     
+     - Parameters:
+        - image: The image used to send
+     
+     - Returns: Void
+     */
     func sendPostCard(_ image: UIImage) {
         
         guard let emailImage = image.jpegData(compressionQuality: 1.0) else { return }
         let fileName = marsImage.earthDate
         
         if MFMailComposeViewController.canSendMail() {
-            
-            
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
             mail.setSubject("Message from Mars!")
-            mail.setPreferredSendingEmailAddress("lukas.kasakaitis@icloud.com")
             mail.addAttachmentData(emailImage, mimeType: "image/jpeg", fileName: fileName)
             present(mail, animated: true)
         } else {
-            print("Cannot send email!")
+            showAlert(with: "No E-Mail Account available", and: "An E-mail account needs to be setup to send the postcard.")
         }
         
     }
@@ -322,21 +338,30 @@ class ImageEditViewController: UIViewController {
     
 }
 
+/// UIScrollViewDelegate implementation
+/// Apple documentation: https://developer.apple.com/documentation/uikit/uiscrollviewdelegate
 extension ImageEditViewController: UIScrollViewDelegate {
     
+    /// Asks the delegate for the view to scale when zooming is about to occur in the scroll view.
+    /// Apple documentation: https://developer.apple.com/documentation/uikit/uiscrollviewdelegate/1619426-viewforzooming
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return editImageView
     }
     
+    /// Tells the delegate that the scroll view’s zoom factor changed.
+    /// Apple documentation: https://developer.apple.com/documentation/uikit/uiscrollviewdelegate/1619409-scrollviewdidzoom
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         updateConstraints(view.bounds.size)
     }
     
 }
 
-
+/// An interface for responding to user interactions with a mail compose view controller.
+/// Apple documentation: https://developer.apple.com/documentation/messageui/mfmailcomposeviewcontrollerdelegate
 extension ImageEditViewController: MFMailComposeViewControllerDelegate {
     
+    /// Tells the delegate that the user wants to dismiss the mail composition view.
+    /// Apple documentation: https://developer.apple.com/documentation/messageui/mfmailcomposeviewcontrollerdelegate/1616880-mailcomposecontroller
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
     }

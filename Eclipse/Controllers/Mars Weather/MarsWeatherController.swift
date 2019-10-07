@@ -9,6 +9,7 @@
 import UIKit
 import SceneKit
 
+/// Mars Weather Controller to manage the display of mars weather data
 class MarsWeatherController: UIViewController {
     
     // MARK: - Outlets
@@ -16,7 +17,6 @@ class MarsWeatherController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: - Properties
-    
     let client = NASAClient()
     var navigationBar: NavigationBar?
     
@@ -60,6 +60,7 @@ class MarsWeatherController: UIViewController {
     
     // MARK: - Helper
     
+    /// Setup the navigation bar
     func setupNavigationBar() {
         navigationBar = NavigationBar(for: self.view, navigationBarStyle: .black, tintColor: .white, title: "Mars Weather", leftButton: .back, rightButton: .celsius, leftButtonAction: #selector(mainView), rightButtonAction: #selector(celsius))
         navigationBar?.load()
@@ -69,6 +70,7 @@ class MarsWeatherController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    /// @objc method to set the degree units to Celsius
     @objc func celsius() {
         datasource.toCelsius()
         navigationBar?.rightButtonAction = #selector(fahrenheit)
@@ -76,6 +78,7 @@ class MarsWeatherController: UIViewController {
         navigationBar?.load()
     }
     
+    /// @objc method to set the degree units to Fahrenheit
     @objc func fahrenheit() {
         datasource.toFahrenheit()
         navigationBar?.rightButtonAction = #selector(celsius)
@@ -83,6 +86,7 @@ class MarsWeatherController: UIViewController {
         navigationBar?.load()
     }
     
+    /// Setup the Collectionview with the delegate and datasource
     func setupCollectionView() {
         collectionView.delegate = delegate
         collectionView.dataSource = datasource

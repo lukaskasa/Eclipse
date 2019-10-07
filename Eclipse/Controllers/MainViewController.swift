@@ -9,6 +9,7 @@
 import UIKit
 import SystemConfiguration
 
+/// The Main Controller used to navigate the application to the different modules
 class MainViewController: UIViewController {
     
     // MARK: - Outlets
@@ -24,6 +25,10 @@ class MainViewController: UIViewController {
     
     // MARK: - Properties
     let client = NASAClient()
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
     
     // MARK: - View Life Cycle
     
@@ -45,11 +50,7 @@ class MainViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
     }
-    
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
+
     // MARK: - Helper
     
     /// Check if internet connection is available

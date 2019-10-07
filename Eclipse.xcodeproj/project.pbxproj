@@ -55,6 +55,7 @@
 		80F8E63123111C770038171D /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8E63023111C770038171D /* Endpoint.swift */; };
 		80F8E63323111DBE0038171D /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8E63223111DBE0038171D /* Secrets.swift */; };
 		80F8E63623111FAF0038171D /* NASA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F8E63523111FAF0038171D /* NASA.swift */; };
+		80FBE231234BDD67005852A5 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80FBE230234BDD67005852A5 /* MessageUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +121,7 @@
 		80F8E63023111C770038171D /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		80F8E63223111DBE0038171D /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		80F8E63523111FAF0038171D /* NASA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASA.swift; sourceTree = "<group>"; };
+		80FBE230234BDD67005852A5 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 			files = (
 				800817F32341F7BA00D8B0FD /* SceneKit.framework in Frameworks */,
 				807378D623392A65000CF477 /* MapKit.framework in Frameworks */,
+				80FBE231234BDD67005852A5 /* MessageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +365,7 @@
 		807378D423392A65000CF477 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				80FBE230234BDD67005852A5 /* MessageUI.framework */,
 				800817F22341F7BA00D8B0FD /* SceneKit.framework */,
 				807378D523392A65000CF477 /* MapKit.framework */,
 			);

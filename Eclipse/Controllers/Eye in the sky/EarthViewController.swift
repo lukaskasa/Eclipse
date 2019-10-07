@@ -38,6 +38,11 @@ class EarthViewController: UIViewController {
         return UISearchController(searchResultsController: locationSearchController)
     }()
     
+    // Hide Status Bar
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     // MARK - View Life Cycle
     
     override func viewDidLoad() {
@@ -46,11 +51,6 @@ class EarthViewController: UIViewController {
         setDelegates()
         setupNavigationBar()
         setupMap()
-    }
-    
-    // TODO: Remove?
-    override var prefersStatusBarHidden: Bool {
-        return true
     }
     
     // MARK: - Helper

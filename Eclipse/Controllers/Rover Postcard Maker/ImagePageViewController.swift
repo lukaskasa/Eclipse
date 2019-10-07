@@ -8,13 +8,15 @@
 
 import UIKit
 
-private let dotColor = UIColor.red
-private let brandColor = UIColor(red: 0, green: 102/255, blue: 179/255, alpha: 1.0)
-private let dotBaseTag = 100
-
+/// Page controller to present each photo on a different page
 class ImagePageViewController: UIPageViewController {
     
     // MARK: - Properties
+    
+    /// Constants
+    private let dotColor = UIColor.red
+    private let brandColor = UIColor(red: 0, green: 102/255, blue: 179/255, alpha: 1.0)
+    private let baseSectionTag = 100
     
     var navigationBar: UINavigationBar!
     var navItem = UINavigationItem(title: "Mars Rover Image")
@@ -22,12 +24,17 @@ class ImagePageViewController: UIPageViewController {
     var imageIndexPath: IndexPath!
     var indexOfCurrentImage: Int!
     
+    // Hide Status Bar
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Setup
+        // Setup
         dataSource = self
         setupNavigationBar()
         setupPageIndicator(images.count)
@@ -36,11 +43,12 @@ class ImagePageViewController: UIPageViewController {
         }
         
     }
-
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
     
+    /**
+     Initialize a new ImageViewerController
+     
+     - Returns: An ImageViewerController responsible for viewing images
+     */
     func imageViewerController(with image: MarsRoverImage) -> ImageViewerController? {
         guard let storyboard = storyboard, let imageViewerController = storyboard.instantiateViewController(withIdentifier: String(describing: ImageViewerController.self)) as? ImageViewerController else { return nil }
         
@@ -50,6 +58,9 @@ class ImagePageViewController: UIPageViewController {
         return imageViewerController
     }
     
+    /**
+     Set up the Navigation Bar
+     */
     func setupNavigationBar() {
         navigationBar = UINavigationBar()
         navigationBar.barStyle = .black
@@ -69,14 +80,30 @@ class ImagePageViewController: UIPageViewController {
         navigationBar.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0.0).isActive = true
     }
     
-    func setActiveDot(with index: Int) {
+    /**
+     Set section for the active index
+     
+     - Parameters:
+        - index: The index of the mars image
+     
+     - Returns: Void
+     */
+    func setActiveSection(for index: Int) {
         for tag in 0...images.count {
-            view.viewWithTag(dotBaseTag + tag)?.backgroundColor = .none
+            view.viewWithTag(baseSectionTag + tag)?.backgroundColor = .none
         }
         
-        view.viewWithTag(dotBaseTag + index)?.backgroundColor = brandColor
+        view.viewWithTag(baseSectionTag + index)?.backgroundColor = brandColor
     }
     
+    /**
+     Setup the image page Indicator to see the progress while scrolling through the images
+     
+     - Parameters:
+        - number: The number of pages / images
+     
+     - Returns: Void
+     */
     func setupPageIndicator(_ number: Int) {
 
         let dotView = UIStackView()
@@ -92,7 +119,7 @@ class ImagePageViewController: UIPageViewController {
         dotView.addSubview(backgroundView)
         
         for index in 0..<number {
-            let dot = self.bar(for: index)
+            let dot = self.section(for: index)
             dotView.addArrangedSubview(dot)
             dot.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -110,20 +137,27 @@ class ImagePageViewController: UIPageViewController {
         backgroundView.leadingAnchor.constraint(equalTo: dotView.leadingAnchor, constant: 0.0).isActive = true
         backgroundView.trailingAnchor.constraint(equalTo: dotView.trailingAnchor, constant: 0.0).isActive = true
         
-        setActiveDot(with: indexOfCurrentImage)
+        setActiveSection(for: indexOfCurrentImage)
     }
     
-    func bar(for index: Int) -> UIView {
-        let bar = UIView(frame: CGRect(x: 0, y: 0, width: 5.0, height: 10.0))
-        bar.tag = dotBaseTag + index
-        bar.backgroundColor = .none
-        return bar
+    /**
+     Create a view for each section with the provided index to tag the view
+     
+     - Returns: An UIView
+     */
+    func section(for index: Int) -> UIView {
+        let section = UIView(frame: CGRect(x: 0, y: 0, width: 5.0, height: 10.0))
+        section.tag = baseSectionTag + index
+        section.backgroundColor = .none
+        return section
     }
     
+    /// @objc method used to dismiss an image view
     @objc func dissmissImageView() {
         dismiss(animated: true, completion: nil)
     }
     
+    /// @objc method used to present the ImageEditViewController View which is used to edit the image
     @objc func editPhoto() {
         guard let storyboard = storyboard else { return }
         
@@ -138,14 +172,18 @@ class ImagePageViewController: UIPageViewController {
     
 }
 
+/// UIPageViewControllerDataSource implementation
+/// Apple documentation: https://developer.apple.com/documentation/uikit/uipageviewcontrollerdatasource
 extension ImagePageViewController: UIPageViewControllerDataSource {
     
+    /// Returns the view controller before the given view controller.
+    /// Apple documentation: https://developer.apple.com/documentation/uikit/uipageviewcontrollerdatasource/1614086-pageviewcontroller
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
         guard let imageVC = viewController as? ImageViewerController, let index = images.firstIndex(where: { $0.id == imageVC.marsImage.id }) else { return nil }
         
         indexOfCurrentImage = index
-        setActiveDot(with: index)
+        setActiveSection(for: index)
         
         if index == images.startIndex {
             return nil
@@ -157,12 +195,14 @@ extension ImagePageViewController: UIPageViewControllerDataSource {
         
     }
     
+    /// Returns the view controller after the given view controller.
+    /// Apple documentation: https://developer.apple.com/documentation/uikit/uipageviewcontrollerdatasource/1614118-pageviewcontroller
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
         guard let imageVC = viewController as? ImageViewerController, let index = images.firstIndex(where: { $0.id == imageVC.marsImage.id }) else { return nil }
         
         indexOfCurrentImage = index
-        setActiveDot(with: index)
+        setActiveSection(for: index)
         
         if index == images.index(before: images.endIndex) {
             return nil
