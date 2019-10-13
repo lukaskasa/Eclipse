@@ -97,8 +97,6 @@ class ImageEditViewController: UIViewController {
     
     /// @objc method to crop the image, set the user selected text and email the image using MessageUI
     @objc func addTextAndSend() {
-        // Add Textfield
-        
         // Text modification - Start
         guard let image = editImageView.image, let text = postCardTextField.text else { return }
         let renderer = UIGraphicsImageRenderer(size: postCardView.frame.size)
@@ -107,22 +105,23 @@ class ImageEditViewController: UIViewController {
         paragraphStyle.alignment = .center
         
         let finalPostcardImage = renderer.image { ctx in
+            
             let textAttributes = [
                 NSAttributedString.Key.font: postcardFont,
+                NSAttributedString.Key.backgroundColor: UIColor.black.withAlphaComponent(0.4),
                 NSAttributedString.Key.foregroundColor: postcardTextColor,
                 NSAttributedString.Key.paragraphStyle: paragraphStyle
             ]
             
             let attributedString = NSAttributedString(string: text, attributes: textAttributes)
             
-        
             image.draw(in: CGRect(origin: CGPoint.zero, size: postCardView.frame.size))
             
             
             let center = CGPoint(x: (postCardView.frame.size.width - postCardTextField.frame.width) / 2.0, y: (postCardView.frame.size.height - postCardTextField.frame.height) / 2.0)
+            
             attributedString.draw(at: center)
         }
-        
         // Text modification - End
         
         sendPostCard(finalPostcardImage)
@@ -234,12 +233,16 @@ class ImageEditViewController: UIViewController {
         postCardTextField.font = postcardFont
         postCardTextField.textAlignment = .center
         postCardTextField.textColor = .white
+        postCardTextField.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         postCardTextField?.text = "Enter your text..."
+    
         editScrollView.addSubview(postCardTextField)
+        
         // Constraints
         postCardTextField.translatesAutoresizingMaskIntoConstraints = false
         postCardTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         postCardTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
         addDoneButtonOnKeyboard()
     }
     
