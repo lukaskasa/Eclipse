@@ -15,14 +15,12 @@ class MarsWeatherController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var marsSceneView: UIView!
     
     // MARK: - Properties
     let client = NASAClient()
+    let marsView = MarsSceneView()
     var navigationBar: NavigationBar?
-    
-    lazy var marsSceneView: MarsSceneView = {
-        return MarsSceneView()
-    }()
     
     var solWeather: [MarsSol]? {
         didSet {
@@ -55,7 +53,11 @@ class MarsWeatherController: UIViewController {
         // Setup
         setupNavigationBar()
         setupCollectionView()
-        stackView.addArrangedSubview(marsSceneView)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        setupMarsSceneView()
     }
     
     // MARK: - Helper
@@ -91,6 +93,15 @@ class MarsWeatherController: UIViewController {
         collectionView.delegate = delegate
         collectionView.dataSource = datasource
         collectionView.reloadData()
+    }
+    
+    func setupMarsSceneView() {
+        marsSceneView.addSubview(marsView)
+        marsView.translatesAutoresizingMaskIntoConstraints = false
+        marsView.topAnchor.constraint(equalTo: marsSceneView.topAnchor, constant: 0.0).isActive = true
+        marsView.rightAnchor.constraint(equalTo: marsSceneView.rightAnchor, constant: 0.0).isActive = true
+        marsView.bottomAnchor.constraint(equalTo: marsSceneView.bottomAnchor, constant: 0.0).isActive = true
+        marsView.leftAnchor.constraint(equalTo: marsSceneView.leftAnchor, constant: 0.0).isActive = true
     }
     
 }
