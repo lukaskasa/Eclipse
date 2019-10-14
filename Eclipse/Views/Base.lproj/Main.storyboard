@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -196,7 +196,7 @@
                             <constraint firstItem="E6u-93-S5b" firstAttribute="top" secondItem="M5a-N7-tr8" secondAttribute="top" id="Ave-go-H1e"/>
                             <constraint firstItem="E6u-93-S5b" firstAttribute="leading" secondItem="M5a-N7-tr8" secondAttribute="leading" id="Swb-m1-bKj"/>
                             <constraint firstItem="M5a-N7-tr8" firstAttribute="trailing" secondItem="E6u-93-S5b" secondAttribute="trailing" id="Tla-Oh-mUI"/>
-                            <constraint firstItem="M5a-N7-tr8" firstAttribute="bottom" secondItem="E6u-93-S5b" secondAttribute="bottom" id="vHr-Cv-cBe"/>
+                            <constraint firstAttribute="bottom" secondItem="E6u-93-S5b" secondAttribute="bottom" id="vHr-Cv-cBe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="M5a-N7-tr8"/>
                     </view>

@@ -14,11 +14,8 @@ class EclipseTests: XCTestCase {
 
     // MARK: - Properties
     var earthImageJSON: Data!
-    
     var marsRoverJSON: Data!
-    
     var marsWeatherJSON: Data!
-    
     var client: NASAClient!
     
     override func setUp() {
