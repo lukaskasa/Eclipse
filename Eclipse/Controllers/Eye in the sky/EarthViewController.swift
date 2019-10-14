@@ -121,6 +121,8 @@ class EarthViewController: UIViewController {
     func setupMap() {
         getLocation()
         mapView.translatesAutoresizingMaskIntoConstraints = false
+        mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0.0).isActive = true
+        
         mapView.showsUserLocation = true
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
