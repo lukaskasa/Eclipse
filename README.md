@@ -9,7 +9,7 @@ The "Rover Postcard Maker" feature uses the "Mars Rover Photos" endpoint to disp
 Weather on Mars takes advantage of the "Insight" endpoint where the temperature data is consumed and displayed in a UICollectionView. Additionally, a rotating sphere with a texture is used to illustrate the planet of Mars.
 
 
-API’s and frameworks in use:
+API's and frameworks in use:
 
 * NASA API (https://api.nasa.gov/)
 * Foundation
